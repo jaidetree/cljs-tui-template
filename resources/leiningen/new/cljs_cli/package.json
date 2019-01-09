@@ -1,0 +1,19 @@
+{
+  "name": "{{project-name}}",
+  "version": "0.1.0",
+  "description": "FIXME",
+  "main": "bin/main.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "lein test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "FIXME"
+  },
+  "author": "FIXME <FIXME@FIXME.com>",
+  "license": "Apache-2.0"
+}

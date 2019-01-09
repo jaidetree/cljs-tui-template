@@ -1,6 +1,6 @@
 (defproject {{raw-name}} "0.1.0-SNAPSHOT"
-  :description "FIX ME"
-  :url "https://github.com/FIX-ME/{{raw-name}}"
+  :description "FIXME"
+  :url "https://github.com/FIXME/{{raw-name}}"
   :min-lein-version "2.8.3"
   :license {:name "The Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"
@@ -51,4 +51,5 @@
                                   [com.cemerick/piggieback "0.2.2"]
                                   [org.clojure/tools.namespace "0.2.11"]]
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]
-                                  :init-ns {{namespace}}}}})
+                                  :init-ns {{namespace}}}
+                   :source-paths ["src" "dev"]}})

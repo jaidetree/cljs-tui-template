@@ -4,11 +4,11 @@
    [blessed :as blessed]
    [cljs.nodejs :as nodejs]
    ;; TODO: Which of these do we need?
-   [{{main-ns}}.debug.view :as debug-view]
+   [{{main-ns}}.debug.views :as debug]
    [{{main-ns}}.keys :as keys]
    [{{main-ns}}.subs]
    [{{main-ns}}.events]
-   [{{main-ns}}.view :as view]
+   [{{main-ns}}.views :as views]
    [fs :as fs]
    [mount.core :refer [defstate] :as mount]
    [re-frame.core :as rf]
@@ -33,11 +33,11 @@
 
 (defn log-fn
   [& args]
-  (swap! debug-view/logger conj (clojure.string/join " " args)))
+  (swap! debug/logger conj (clojure.string/join " " args)))
 
 (defn load
   []
-  (-> (r/reactify-component view/root)
+  (-> (r/reactify-component views/root)
       (r/create-element #js {})
       (render @screen)))
 

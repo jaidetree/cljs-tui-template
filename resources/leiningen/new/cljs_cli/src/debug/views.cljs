@@ -1,4 +1,4 @@
-(ns {{main-ns}}.debug.view
+(ns {{main-ns}}.debug.views
   (:require [re-frame.core :as rf]
             [reagent.core :as r]))
 
