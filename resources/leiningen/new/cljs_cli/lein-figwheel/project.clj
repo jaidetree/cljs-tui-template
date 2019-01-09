@@ -1,7 +1,7 @@
 (defproject {{raw-name}} "0.1.0-SNAPSHOT"
   :description "FIXME"
   :url "https://github.com/FIXME/{{raw-name}}"
-  :min-lein-version "2.8.3"
+  :min-lein-version "2.0.0"
   :license {:name "The Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"
             :distribution :repo}
@@ -13,7 +13,7 @@
                                                [cljsjs/create-react-class]]]
                  [re-frame "0.10.6"]]
   :plugins [[lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]
-            [lein-figwheel "0.5.17"]]
+            [lein-figwheel "0.5.18"]]
   :source-paths ["src"]
   :clean-targets ["target" "node_modules" "package.json" "package-lock.json"]
   :cljsbuild {:builds [{:id           "dev"
@@ -34,7 +34,7 @@
                                                               :node-json-color-stringify "1.1.0"
                                                               :ws                        "6.1.2"}
                                        :install-deps         true}}
-                       {:id "prod"
+                       {:id           "prod"
                         :source-paths ["src"]
                         :compiler     {:output-to     "target/main.js"
                                        :output-dir    "target/js/compiled/prod"
@@ -47,9 +47,8 @@
                                                        :create-react-class        "15.6.3"
                                                        :node-json-color-stringify "1.1.0"}
                                        :install-deps true}}]}
-  :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.13"]
-                                  [com.cemerick/piggieback "0.2.2"]
+  :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.18"]
+                                  [cider/piggieback "0.3.10"]
                                   [org.clojure/tools.namespace "0.2.11"]]
-                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]
-                                  :init-ns {{namespace}}}
+                   :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
                    :source-paths ["src" "dev"]}})

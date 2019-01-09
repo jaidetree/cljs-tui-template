@@ -4,8 +4,6 @@
    [figwheel-sidecar.config   :as fc]
    [clojure.tools.namespace.repl :refer (refresh refresh-all)]))
 
-(println "I'm loading the user config")
-
 (defn start []
   (f/start-figwheel!))
 
