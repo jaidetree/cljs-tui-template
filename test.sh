@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-lein new cljs-cli myproject --to-dir test/myproject
+rm -rf test/myproject
+id=`date +%s`
+lein new cljs-cli my-test-project --to-dir test/test-$id
+cd test/test-$id && lein figwheel

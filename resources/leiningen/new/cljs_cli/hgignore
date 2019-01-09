@@ -1,0 +1,13 @@
+*.class
+*.jar
+.git/**
+.gitignore
+/.lein-*
+/.nrepl-port
+checkouts/**
+classes/**
+pom.xml
+pom.xml.asc
+profiles.clj
+syntax: glob
+target/**
