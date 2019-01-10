@@ -15,7 +15,7 @@
   :plugins [[lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]
             [lein-figwheel "0.5.18"]]
   :source-paths ["src"]
-  :clean-targets ["target" "node_modules" "package.json" "package-lock.json"]
+  :clean-targets ["target" "node_modules" "target/js/compiled"]
   :cljsbuild {:builds [{:id           "dev"
                         :source-paths ["src"]
                         :figwheel     {:on-jsload "{{raw-name}}.core/load"}
