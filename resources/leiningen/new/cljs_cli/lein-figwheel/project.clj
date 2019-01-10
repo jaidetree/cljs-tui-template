@@ -1,7 +1,7 @@
 (defproject {{raw-name}} "0.1.0-SNAPSHOT"
   :description "FIXME"
   :url "https://github.com/FIXME/{{raw-name}}"
-  :min-lein-version "2.0.0"
+  :min-lein-version "2.7.1"
   :license {:name "The Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"
             :distribution :repo}
