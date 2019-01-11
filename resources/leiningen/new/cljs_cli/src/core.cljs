@@ -48,6 +48,7 @@
   (load))
 
 (set! (.-log js/console) log-fn)
+(set! (.-error js/console) log-fn)
 (re-frame.loggers/set-loggers! {:log log-fn
                                 :warn log-fn})
 
