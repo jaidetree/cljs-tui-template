@@ -1,4 +1,5 @@
-(ns user)
+(ns user
+  (:require [figwheel.main.api]))
 
 ;; user is a namespace that the Clojure runtime looks for and
 ;; loads if its available
@@ -9,9 +10,12 @@
 ;; The definitions in here will be available if you run "clj -Acljs" or launch a
 ;; Clojure repl some other way
 
-(defn fig-start
+(defn start
   "This starts the figwheel build"
   []
-  (require 'figwheel.main)
   ;; otherwise you can pass a configuration into start-figwheel! manually
-  (figwheel.main/start "dev"))
+  (figwheel.main.api/start "dev"))
+
+(defn repl
+  []
+  (figwheel.main.api/cljs-repl "dev"))

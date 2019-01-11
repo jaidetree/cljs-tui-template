@@ -1,4 +1,15 @@
-^{:watch-dirs ["test" "src"]
-  :css-dirs ["resources/public/css"]
-  :auto-testing true}
-{:main {{namespace}}}
+{:main {{namespace}}
+ :asset-path           "target/js/compiled/dev"
+ :output-to            "target/js/compiled/{{project-name}}.js"
+ :output-dir           "target/js/compiled/dev"
+ :target               :nodejs
+ :optimizations        :none
+ :source-map-timestamp true
+ :npm-deps             {:blessed                   "0.1.81"
+                        :react-blessed             "0.5.0"
+                        :react                     "16.7.0"
+                        :react-dom                 "16.7.0"
+                        :create-react-class        "15.6.3"
+                        :node-json-color-stringify "1.1.0"
+                        :ws                        "6.1.2"}
+ :install-deps         true}

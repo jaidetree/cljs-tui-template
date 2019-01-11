@@ -1,10 +1,12 @@
 ;; Figwheel-main configuration options see: https://figwheel.org/config-options
 ;; these will be overriden by the metadata config options in dev.cljs.edn build file
-{:main {{raw-name}}.core
- :output-to "target/main.js"
- :output-dir "target/js/compiled/prod"
- :target :nodejs
- :optimizations :simple}
+{:watch-dirs ["src"]
+ :launch-node false
+ :client-print-to [:repl]
+ :log-level :off
+ :client-log-level :warning
+ :log-syntax-error-style :concise
+ :pprint-config true}
 
 ;; Set the server port https://figwheel.org/config-options#ring-server-options
 ;; :ring-server-options {:port 9500}
