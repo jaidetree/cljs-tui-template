@@ -1,6 +1,6 @@
 {:main {{namespace}}
  :asset-path           "target/js/compiled/dev"
- :output-to            "target/js/compiled/{{project-name}}.js"
+ :output-to            "target/js/compiled/{{raw-name}}.js"
  :output-dir           "target/js/compiled/dev"
  :target               :nodejs
  :optimizations        :none

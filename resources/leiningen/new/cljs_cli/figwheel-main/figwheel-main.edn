@@ -2,11 +2,7 @@
 ;; these will be overriden by the metadata config options in dev.cljs.edn build file
 {:watch-dirs ["src"]
  :launch-node false
- :client-print-to [:repl]
- :log-level :off
- :client-log-level :warning
- :log-syntax-error-style :concise
- :pprint-config true}
+ :client-print-to [:repl]}
 
 ;; Set the server port https://figwheel.org/config-options#ring-server-options
 ;; :ring-server-options {:port 9500}
