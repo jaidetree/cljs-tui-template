@@ -1,4 +1,4 @@
-(defproject {{ raw-name }} "0.1.0-SNAPSHOT"
+(defproject {{raw-name}} "0.1.0-SNAPSHOT"
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -19,10 +19,10 @@
   :aliases {"fig"       ["run" "-m" "figwheel.main"]
             "fig:build" ["run" "-m" "figwheel.main" "-b" "dev" "-r"]
             "fig:min"   ["run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]
-            "fig:test"  ["run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" {{test-runner-ns}}]}
+            "fig:test"  ["run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" {{main-ns}}.test-runner]}
 
-  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.1.9"]{{^windows?}}
-                                  [com.bhauman/rebel-readline-cljs "0.1.4"]{{/windows?}}]
-                   {{#deps?}}:resource-paths ["target"]
+  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.0"]
+                                  [com.bhauman/rebel-readline-cljs "0.1.4"]]
                    ;; need to add the compliled assets to the :clean-targets
-                   :clean-targets ^{:protect false} ["target"]{{/deps?}}}})
+                   :clean-targets ^{:protect false} ["target"]
+                   :source-paths ["src" "dev"]}})

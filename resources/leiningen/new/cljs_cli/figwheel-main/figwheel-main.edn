@@ -1,13 +1,18 @@
 ;; Figwheel-main configuration options see: https://figwheel.org/config-options
 ;; these will be overriden by the metadata config options in dev.cljs.edn build file
-{}
+{:main {{raw-name}}.core
+ :output-to "target/main.js"
+ :output-dir "target/js/compiled/prod"
+ :target :nodejs
+ :optimizations :simple}
 
 ;; Set the server port https://figwheel.org/config-options#ring-server-options
 ;; :ring-server-options {:port 9500}
 
 ;; Target directory https://figwheel.org/config-options#target-dir
 ;; you may want to set this to resources if you are using Leiningen
-;; :target-dir "resources"{{/deps?}}{{^deps?}};; Change the target directory from the "target" to "resources"
+;; :target-dir "resources"
+;; Change the target directory from the "target" to "resources"
 ;; https://figwheel.org/config-options#target-dir
 ;; :target-dir "resources"}
 

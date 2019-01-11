@@ -17,7 +17,6 @@
                               ["LICENSE"                               "LICENSE"]
                               ["README.md"                             "README.md"]
                               ["docs/intro.md"                         "docs/intro.md"]
-                              ["package.json"                          "package.json"]
                               ["src/{{nested-dirs}}/core.cljs"         "src/core.cljs"]
                               ["src/{{nested-dirs}}/events.cljs"       "src/events.cljs"]
                               ["src/{{nested-dirs}}/keys.cljs"         "src/keys.cljs"]
@@ -27,12 +26,14 @@
                               ["test/{{nested-dirs}}/core_test.cljs"   "test/core_test.cljs"]]
 
             "+lein-figwheel" [["dev/user.clj"                          "lein-figwheel/dev/user.clj"]
+                              ["package.json"                          "lein-figwheel/package.json"]
                               ["project.clj"                           "lein-figwheel/project.clj"]
                               ["test/{{nested-dirs}}/test_runner.cljs" "lein-figwheel/test/test_runner.cljs"]]
 
-            "+figwheel-main" [["dev/user.clj"                          "fighwheel-main/dev/user.clj"]
+            "+figwheel-main" [["dev/user.clj"                          "figwheel-main/dev/user.clj"]
                               ["dev.cljs.edn"                          "figwheel-main/dev.cljs.edn"]
                               ["figwheel-main.edn"                     "figwheel-main/figwheel-main.edn"]
+                              ["package.json"                          "figwheel-main/package.json"]
                               ["project.clj"                           "figwheel-main/project.clj"]
                               ["test.cljs.edn"                         "figwheel-main/test.cljs.edn"]
                               ["test/{{nested-dirs}}/test_runner.cljs" "figwheel-main/test/test_runner.cljs"]]
@@ -43,7 +44,14 @@
 
 (defn select-files
   [args]
-  (reduce into (get files :common) (vals (select-keys files args))))
+  (->> args
+       (select-keys files)
+       (vals)
+       (reduce into (get files :common))))
+
+(defn render-template
+  [data [dest template]]
+  [dest (render template data)])
 
 (defn create-files
   [name args]
@@ -57,7 +65,11 @@
               :year (year)
               :date (date)}]
     (main/info "Generating fresh 'lein new' cljs-cli project.")
-    (apply ->files data (select-files args))))
+    (->> args
+         (mapcat #(get files %))
+         (into (get files :common))
+         (map #(render-template data %))
+         (apply ->files data))))
 
 (defn args-valid?
   [args]
@@ -88,8 +100,9 @@
   (System/exit 0))
 
 (defn display-error
-  []
+  [args]
   (println "Invalid arguments to new cljs-cli template.")
+  (println "Received:" (clojure.string/join " " args))
   (println "")
   (help)
   (System/exit 1))
@@ -101,7 +114,7 @@
   ([name & args]
    (if (args-valid? args)
      (create-files name args)
-     (display-error))))
+     (display-error args))))
 
 (comment
  (select-files [])

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-rm -rf test/myproject
-mkdir -p test
+set -eu -o pipefail
+mkdir -p examples
 id=`date +%s`
-lein new cljs-cli my-test-project --to-dir test/test-$id
-cd test/test-$id && lein figwheel
+lein new cljs-cli my-test-project --to-dir examples/test-$id -- "$@"
+cd examples/test-$id && lein figwheel
