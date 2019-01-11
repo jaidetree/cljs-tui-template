@@ -31,25 +31,16 @@
 
 (defonce render (react-blessed/createBlessedRenderer blessed))
 
-(defn log-fn
-  [& args]
-  (swap! debug/logger conj (clojure.string/join " " args)))
-
-(defn load
-  []
-  (-> (r/reactify-component views/root)
+(defn init!
+  [view]
+  (mount/start)
+  (rf/dispatch-sync [:init])
+  (-> (r/reactify-component view)
       (r/create-element #js {})
       (render @screen)))
 
 (defn -main
   []
-  (mount/start)
-  (rf/dispatch-sync [:init])
-  (load))
-
-(set! (.-log js/console) log-fn)
-(set! (.-error js/console) log-fn)
-(re-frame.loggers/set-loggers! {:log log-fn
-                                :warn log-fn})
+  (init! views/root))
 
 (set! *main-cli-fn* -main)

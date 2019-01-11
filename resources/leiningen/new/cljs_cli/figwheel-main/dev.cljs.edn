@@ -1,4 +1,5 @@
-{:main {{namespace}}
+^{:watch-dirs ["src" "env/dev"]}
+{:main {{main-ns}}.app
  :asset-path           "target/js/compiled/dev"
  :output-to            "target/js/compiled/{{raw-name}}.js"
  :output-dir           "target/js/compiled/dev"

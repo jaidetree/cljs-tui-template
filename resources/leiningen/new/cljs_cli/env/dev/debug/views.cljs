@@ -28,3 +28,10 @@
    [:text {:width   "40%"
            :content (str @(rf/subscribe [:db]))}]
    [log-box (dec height)]])
+
+(defn root [_]
+  [:box#base {:left   0
+              :right  0
+              :width  "100%"
+              :height "100%"}
+   [debug-box {:height 10}]])

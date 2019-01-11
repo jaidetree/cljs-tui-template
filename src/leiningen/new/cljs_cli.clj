@@ -11,30 +11,29 @@
 
 (def render (renderer "cljs-cli"))
 
-(def files {:common          [[".gitignore"                            "gitignore"]
-                              [".hgignore"                             "hgignore"]
-                              ["CHANGELOG.md"                          "CHANGELOG.md"]
-                              ["LICENSE"                               "LICENSE"]
-                              ["README.md"                             "README.md"]
-                              ["docs/intro.md"                         "docs/intro.md"]
-                              ["src/{{nested-dirs}}/core.cljs"         "src/core.cljs"]
-                              ["src/{{nested-dirs}}/events.cljs"       "src/events.cljs"]
-                              ["src/{{nested-dirs}}/keys.cljs"         "src/keys.cljs"]
-                              ["src/{{nested-dirs}}/subs.cljs"         "src/subs.cljs"]
-                              ["src/{{nested-dirs}}/views.cljs"        "src/views.cljs"]
-                              ["src/{{nested-dirs}}/debug/views.cljs"  "src/debug/views.cljs"]
-                              ["test/{{nested-dirs}}/core_test.cljs"   "test/core_test.cljs"]]
+(def files {:common          [[".gitignore"                               "gitignore"]
+                              [".hgignore"                                "hgignore"]
+                              ["CHANGELOG.md"                             "CHANGELOG.md"]
+                              ["docs/intro.md"                            "docs/intro.md"]
+                              ["env/dev/{{nested-dirs}}/app.cljs"         "env/dev/app.cljs"]
+                              ["env/dev/{{nested-dirs}}/debug/views.cljs" "env/dev/debug/views.cljs"]
+                              ["package.json"                             "package.json"]
+                              ["project.clj"                              "project.clj"]
+                              ["LICENSE"                                  "LICENSE"]
+                              ["README.md"                                "README.md"]
+                              ["src/{{nested-dirs}}/core.cljs"            "src/core.cljs"]
+                              ["src/{{nested-dirs}}/events.cljs"          "src/events.cljs"]
+                              ["src/{{nested-dirs}}/keys.cljs"            "src/keys.cljs"]
+                              ["src/{{nested-dirs}}/subs.cljs"            "src/subs.cljs"]
+                              ["src/{{nested-dirs}}/views.cljs"           "src/views.cljs"]
+                              ["test/{{nested-dirs}}/core_test.cljs"      "test/core_test.cljs"]]
 
-            "+lein-figwheel" [["dev/user.clj"                          "lein-figwheel/dev/user.clj"]
-                              ["package.json"                          "lein-figwheel/package.json"]
-                              ["project.clj"                           "lein-figwheel/project.clj"]
+            "+lein-figwheel" [["env/dev/user.clj"                      "lein-figwheel/env/dev/user.clj"]
                               ["test/{{nested-dirs}}/test_runner.cljs" "lein-figwheel/test/test_runner.cljs"]]
 
-            "+figwheel-main" [["dev/user.clj"                          "figwheel-main/dev/user.clj"]
+            "+figwheel-main" [["env/dev/user.clj"                      "figwheel-main/env/dev/user.clj"]
                               ["dev.cljs.edn"                          "figwheel-main/dev.cljs.edn"]
                               ["figwheel-main.edn"                     "figwheel-main/figwheel-main.edn"]
-                              ["package.json"                          "figwheel-main/package.json"]
-                              ["project.clj"                           "figwheel-main/project.clj"]
                               ["test.cljs.edn"                         "figwheel-main/test.cljs.edn"]
                               ["test/{{nested-dirs}}/test_runner.cljs" "figwheel-main/test/test_runner.cljs"]]
 
@@ -57,13 +56,17 @@
   [name args]
   (let [render (renderer "cljs-cli")
         main-ns (sanitize-ns name)
+        type (first args)
         data {:raw-name name
               :name (project-name name)
               :namespace (multi-segment main-ns)
               :main-ns main-ns
               :nested-dirs (name-to-path main-ns)
               :year (year)
-              :date (date)}]
+              :date (date)
+              :lein-figwheel? (= type "+lein-figwheel")
+              :figwheel-main? (= type "+figwheel-main")
+              :shadow?        (= type "+shadow")}]
     (main/info "Generating fresh 'lein new' cljs-cli project.")
     (->> args
          (mapcat #(get files %))
@@ -110,7 +113,7 @@
 (defn cljs-cli
   "FIXME: write documentation"
   ([name]
-   (create-files name ["+lein-figwheel"]))
+   (create-files name ["+figwheel-main"]))
   ([name & args]
    (if (args-valid? args)
      (create-files name args)

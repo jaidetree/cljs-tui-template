@@ -7,7 +7,7 @@
 (defn start []
   (f/start-figwheel!))
 
-(defn cljs-repl []
+(defn repl []
   (f/cljs-repl))
 
 (defn stop []

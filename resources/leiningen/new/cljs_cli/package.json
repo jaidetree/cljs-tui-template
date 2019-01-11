@@ -8,7 +8,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "lein test"
+    "test": "lein test",{{#lein-figwheel?}}
+    "start": "lein figwheel",{{/lein-figwheel?}}{{#figwheel-main?}}
+    "start": "lein fig:build",{{/figwheel-main?}}
+    "repl": "lein repl"
   },
   "repository": {
     "type": "git",
