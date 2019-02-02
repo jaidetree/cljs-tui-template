@@ -9,7 +9,9 @@
   },
   "scripts": {
     "test": "lein test",{{#lein-figwheel?}}
+    "init": "lein figwheel",
     "start": "lein figwheel",{{/lein-figwheel?}}{{#figwheel-main?}}
+    "init": "npm install && lein fig:build",
     "start": "lein fig:build",{{/figwheel-main?}}
     "repl": "lein repl"
   },
@@ -18,5 +20,18 @@
     "url": "FIXME"
   },
   "author": "FIXME <FIXME@FIXME.com>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0"{{#figwheel-main?}},
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "react-blessed": "^0.5.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "create-react-class": "^15.6.3",
+    "node-json-color-stringify": "^1.1.0",
+    "ws": "^6.1.2"
+  }{{/figwheel-main?}}{{#shadow?}},
+  "dependencies": {
+    "shadow-cljs": "^2.7.24",
+    "source-map-support": "^0.5.10"
+  }{{/shadow?}}
 }

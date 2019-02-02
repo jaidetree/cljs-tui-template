@@ -6,11 +6,4 @@
  :target               :nodejs
  :optimizations        :none
  :source-map-timestamp true
- :npm-deps             {:blessed                   "0.1.81"
-                        :react-blessed             "0.5.0"
-                        :react                     "16.7.0"
-                        :react-dom                 "16.7.0"
-                        :create-react-class        "15.6.3"
-                        :node-json-color-stringify "1.1.0"
-                        :ws                        "6.1.2"}
- :install-deps         true}
+ :npm-deps             false}

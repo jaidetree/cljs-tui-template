@@ -1,0 +1,10 @@
+{:source-paths ["src" "env/dev"]
+ :dependencies [[mount "0.1.15"]
+                [reagent "0.8.1" :exclusions [[cljsjs/react]
+                                              [cljsjs/react-dom]
+                                              [cljsjs/create-react-class]]]
+                [re-frame "0.10.6"]]
+ :builds {:app {:output-to "target/main.js"
+                :target :node-script
+                :main {{main-ns}}.app/main!
+                :devtools {:after-load {{main-ns}}.app/reload!}}}}

@@ -1,4 +1,4 @@
-(ns ^:figwheel-no-load {{main-ns}}.app
+(ns {{^shadow?}}^:figwheel-no-load {{/shadow?}}{{main-ns}}.app
   (:require [{{namespace}} :as core]
             [{{main-ns}}.debug.views :as debug]))
 
