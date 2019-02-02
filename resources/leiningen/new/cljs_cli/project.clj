@@ -42,7 +42,7 @@
                                        :install-deps         true}}
                        {:id           "prod"
                         :source-paths ["src"]
-                        :compiler     {:main {{raw-name}}.app
+                        :compiler     {:main {{raw-name}}.core
                                        :output-to     "target/main.js"
                                        :output-dir    "target/js/compiled/prod"
                                        :target        :nodejs

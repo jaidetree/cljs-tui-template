@@ -2,7 +2,7 @@
 set -eu -o pipefail
 mkdir -p examples
 
-if [ -n $1 ];
+if [ -z "$1" ];
   then
     name="figwheel-main"
   else

@@ -4,7 +4,11 @@
                                               [cljsjs/react-dom]
                                               [cljsjs/create-react-class]]]
                 [re-frame "0.10.6"]]
- :builds {:app {:output-to "target/main.js"
-                :target :node-script
-                :main {{main-ns}}.app/main!
-                :devtools {:after-load {{main-ns}}.app/reload!}}}}
+ :builds {:app {:output-to  "target/main.js"
+                :output-dir "target/js/compiled/prod"
+                :target     :node-script
+                :dev        {:main             {{main-ns}}.app/main!
+                             :output-to        "target/js/compiled/{{raw-name}}.js"
+                             :output-dir       "target/js/compiled/dev"}
+                :release    {:main             {{main-ns}}.core/main!
+                             :compiler-options {:optimizations :simple}}}}}

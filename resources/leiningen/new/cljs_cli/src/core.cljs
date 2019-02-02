@@ -39,8 +39,8 @@
       (r/create-element #js {})
       (render @screen)))
 
-(defn -main
+(defn main!
   []
   (init! views/root))
 
-(set! *main-cli-fn* -main)
+(set! *main-cli-fn* main!)

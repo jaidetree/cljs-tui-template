@@ -2,8 +2,11 @@
   (:require [{{namespace}} :as core]
             [{{main-ns}}.debug.views :as debug]))
 
-(core/init! debug/root)
-
+(defn main!
+  [& args]
+  (core/init! debug/root))
+{{^shadow?}}
+(main!){{/shadow?}}
 (defn log-fn
   [& args]
   (swap! debug/logger conj (clojure.string/join " " args)))
