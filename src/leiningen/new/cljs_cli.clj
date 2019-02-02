@@ -11,6 +11,45 @@
 
 (def render (renderer "cljs-cli"))
 
+(defn mark-last
+  [deps]
+  (assoc-in deps [(dec (count deps)) :last] true))
+
+(defn format-deps
+  [deps]
+  (->> deps
+       (map (fn format-dep
+              [[name version & {:keys [exclusions]}]]
+              {:name name
+               :version version
+               :exclusions? (some? exclusions)
+               :exclusions (when exclusions
+                             (format-deps exclusions))}))
+       (into [])
+       (mark-last)))
+
+(def clj-deps (format-deps
+               '[[org.clojure/clojure       "1.10.0"]
+                 [org.clojure/clojurescript "1.10.516"]
+                 [mount                     "0.1.15"]
+                 [reagent                   "0.8.1" :exclusions [[cljsjs/react]
+                                                                 [cljsjs/react-dom]
+                                                                 [cljsjs/create-react-class]]]
+                 [re-frame                  "0.10.6"]]))
+
+(def cljs-deps {:common (format-deps
+                         '[[blessed                   "0.1.81"]
+                           [react-blessed             "0.5.0"]
+                           [react                     "16.7.0"]
+                           [react-dom                 "16.7.0"]
+                           [create-react-class        "15.6.3"]
+                           [node-json-color-stringify "1.1.0"]])
+                :shadow (format-deps
+                         '[[shadow-cljs               "2.7.24"]
+                           [source-map-support        "0.5.10"]])
+                :dev    (format-deps
+                         '[[ws                        "6.1.2"]])})
+
 (def files {:common          [[".gitignore"                               "gitignore"]
                               [".hgignore"                                "hgignore"]
                               ["CHANGELOG.md"                             "CHANGELOG.md"]
@@ -18,7 +57,6 @@
                               ["env/dev/{{nested-dirs}}/app.cljs"         "env/dev/app.cljs"]
                               ["env/dev/{{nested-dirs}}/debug/views.cljs" "env/dev/debug/views.cljs"]
                               ["package.json"                             "package.json"]
-                              ["project.clj"                              "project.clj"]
                               ["LICENSE"                                  "LICENSE"]
                               ["README.md"                                "README.md"]
                               ["src/{{nested-dirs}}/core.cljs"            "src/core.cljs"]
@@ -29,11 +67,13 @@
                               ["test/{{nested-dirs}}/core_test.cljs"      "test/core_test.cljs"]]
 
             "+lein-figwheel" [["env/dev/user.clj"                      "lein-figwheel/env/dev/user.clj"]
+                              ["project.clj"                           "project.clj"]
                               ["test/{{nested-dirs}}/test_runner.cljs" "lein-figwheel/test/test_runner.cljs"]]
 
             "+figwheel-main" [["env/dev/user.clj"                      "figwheel-main/env/dev/user.clj"]
                               ["dev.cljs.edn"                          "figwheel-main/dev.cljs.edn"]
                               ["figwheel-main.edn"                     "figwheel-main/figwheel-main.edn"]
+                              ["project.clj"                           "project.clj"]
                               ["test.cljs.edn"                         "figwheel-main/test.cljs.edn"]
                               ["test/{{nested-dirs}}/test_runner.cljs" "figwheel-main/test/test_runner.cljs"]]
 
@@ -66,7 +106,9 @@
               :date (date)
               :lein-figwheel? (= type "+lein-figwheel")
               :figwheel-main? (= type "+figwheel-main")
-              :shadow?        (= type "+shadow")}]
+              :shadow?        (= type "+shadow")
+              :clj-deps clj-deps
+              :cljs-deps cljs-deps}]
     (main/info "Generating fresh 'lein new' cljs-cli project.")
     (->> args
          (mapcat #(get files %))
