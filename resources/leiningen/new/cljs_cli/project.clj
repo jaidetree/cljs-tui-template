@@ -27,8 +27,10 @@
                                        :target :nodejs
                                        :optimizations :none
                                        :source-map-timestamp true
-                                       :npm-deps             {<%#cljs-deps.common%><%0%> <%1%>
-                                                             <%/cljs-deps.common%>}
+                                       :npm-deps             {<%#cljs-deps.common%>:<%name%> "<%version%>"<%^last%>
+                                                              <%/last%><%/cljs-deps.common%><%#cljs-deps.dev%>
+                                                              :<%name%> "<%version%>"<%^last%>
+                                                              <%/last%><%/cljs-deps.dev%>}
                                        :install-deps         true}}
                        {:id           "prod"
                         :source-paths ["src"]
@@ -37,12 +39,8 @@
                                        :output-dir    "target/js/compiled/prod"
                                        :target        :nodejs
                                        :optimizations :simple
-                                       :npm-deps      {:blessed                   "0.1.81"
-                                                       :react-blessed             "0.5.0"
-                                                       :react                     "16.7.0"
-                                                       :react-dom                 "16.7.0"
-                                                       :create-react-class        "15.6.3"
-                                                       :node-json-color-stringify "1.1.0"}
+                                       :npm-deps      {<%#cljs-deps.common%>:<%name%> "<%version%>"<%^last%>
+                                                       <%/last%><%/cljs-deps.common%>}
                                        :install-deps true}}]}<%/lein-figwheel?%>
   :profiles {:dev {:dependencies [<%#lein-figwheel?%>[figwheel-sidecar "0.5.18"]
                                   <%/lein-figwheel?%>[cider/piggieback "0.3.10"]

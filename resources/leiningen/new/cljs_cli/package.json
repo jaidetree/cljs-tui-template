@@ -1,44 +1,42 @@
+{{=<% %>=}}
 {
-  "name": "{{project-name}}",
+  "name": "<%name%>",
   "version": "0.1.0",
   "description": "FIXME",
   "main": "bin/main.js",
   "directories": {
     "doc": "docs",
     "test": "test"
-  },{{#figwheel-main?}}
+  },<%#figwheel-main?%>
   "scripts": {
     "test": "",
     "init": "lein fig:build",
     "start": "lein fig:build",
     "repl": "lein repl"
-  },{{/figwheel-main?}}{{#lein-figwheel?}}
+  },<%/figwheel-main?%><%#lein-figwheel?%>
   "scripts": {
     "test": "",
     "init": "lein figwheel",
     "start": "lein figwheel",
     "repl": "lein repl"
-  },{{/lein-figwheel?}}{{#shadow?}}
+  },<%/lein-figwheel?%><%#shadow?%>
   "scripts": {
     "test": "",
     "init": "npm install && npx shadow-cljs watch app",
     "repl": "npx shadow-cljs cljs-repl app"
-  },{{/shadow?}}
+  },<%/shadow?%>
   "repository": {
     "type": "git",
     "url": "FIXME"
   },
   "author": "FIXME <FIXME@FIXME.com>",
-  "license": "Apache-2.0"{{#shadow?}},
-  "dependencies": {
-    "blessed": "^0.1.81",
-    "create-react-class": "^15.6.3",
-    "node-json-color-stringify": "^1.1.0",
-    "react": "^16.7.0",
-    "react-blessed": "^0.5.0",
-    "react-dom": "^16.7.0",
-    "shadow-cljs": "^2.7.24",
-    "source-map-support": "^0.5.10",
-    "ws": "^6.1.2"
-  }{{/shadow?}}
+  "license": "Apache-2.0"<%#shadow?%>,
+  "dependencies": {<%#cljs-deps.common%>
+    "<%name%>": "^<%version%>"<%^last%>,<%/last%><%/cljs-deps.common%>
+  },
+  "devDependencies": {<%#cljs-deps.dev%>
+    "<%name%>": "^<%version%>",<%/cljs-deps.dev%><%#cljs-deps.shadow%>
+    "<%name%>": "^<%version%>"<%^last%>,<%/last%><%/cljs-deps.shadow%>
+  }<%/shadow?%>
 }
+<%={{ }}=%>

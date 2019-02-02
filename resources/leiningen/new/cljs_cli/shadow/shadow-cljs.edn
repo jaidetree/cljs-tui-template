@@ -1,14 +1,14 @@
+{{=<% %>=}}
 {:source-paths ["src" "env/dev"]
- :dependencies [[mount "0.1.15"]
-                [reagent "0.8.1" :exclusions ["cljsjs/react"
-                                              "cljsjs/react-dom"
-                                              "cljsjs/create-react-class"]]
-                [re-frame "0.10.6"]]
+ :dependencies [<%#clj-deps%>[<%name%> "<%version%>"<%#exclusions?%> :exclusions [<%#exclusions%>[<%name%>]<%^last%>
+                                              <%/last%><%/exclusions%>]<%/exclusions?%>]<%^last%>
+                <%/last%><%/clj-deps%>]
  :builds {:app {:output-to  "target/main.js"
                 :output-dir "target/js/compiled/prod"
                 :target     :node-script
-                :dev        {:main             {{main-ns}}.app/main!
-                             :output-to        "target/js/compiled/{{raw-name}}.js"
+                :dev        {:main             <%main-ns%>.app/main!
+                             :output-to        "target/js/compiled/<%raw-name%>.js"
                              :output-dir       "target/js/compiled/dev"}
-                :release    {:main             {{main-ns}}.core/main!
+                :release    {:main             <%main-ns%>.core/main!
                              :compiler-options {:optimizations :simple}}}}}
+<%={{ }}=%>

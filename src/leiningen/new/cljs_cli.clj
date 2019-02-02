@@ -73,6 +73,7 @@
             "+figwheel-main" [["env/dev/user.clj"                      "figwheel-main/env/dev/user.clj"]
                               ["dev.cljs.edn"                          "figwheel-main/dev.cljs.edn"]
                               ["figwheel-main.edn"                     "figwheel-main/figwheel-main.edn"]
+                              ["prod.cljs.edn"                         "figwheel-main/prod.cljs.edn"]
                               ["project.clj"                           "project.clj"]
                               ["test.cljs.edn"                         "figwheel-main/test.cljs.edn"]
                               ["test/{{nested-dirs}}/test_runner.cljs" "figwheel-main/test/test_runner.cljs"]]
