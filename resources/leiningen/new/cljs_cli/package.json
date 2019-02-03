@@ -3,34 +3,38 @@
   "name": "<%name%>",
   "version": "0.1.0",
   "description": "FIXME",
-  "main": "bin/main.js",
+  "main": "target/main.js",
+  "author": "FIXME <FIXME@FIXME.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FIXME/<%raw-name%>"
+  },
   "directories": {
     "doc": "docs",
-    "test": "test"
-  },<%#figwheel-main?%>
+    "test": "test",
+    "target": "target"
+  },
+  "bin": {
+    "<%raw-name%>": "target/main.js"
+  }<%#figwheel-main?%>,
   "scripts": {
     "test": "",
     "init": "lein fig:build",
     "start": "lein fig:build",
     "repl": "lein repl"
-  },<%/figwheel-main?%><%#lein-figwheel?%>
+  }<%/figwheel-main?%><%#lein-figwheel?%>,
   "scripts": {
     "test": "",
     "init": "lein figwheel",
     "start": "lein figwheel",
     "repl": "lein repl"
-  },<%/lein-figwheel?%><%#shadow?%>
+  }<%/lein-figwheel?%><%#shadow?%>,
   "scripts": {
     "test": "",
     "init": "npm install && npx shadow-cljs watch app",
     "repl": "npx shadow-cljs cljs-repl app"
-  },<%/shadow?%>
-  "repository": {
-    "type": "git",
-    "url": "FIXME"
   },
-  "author": "FIXME <FIXME@FIXME.com>",
-  "license": "Apache-2.0"<%#shadow?%>,
   "dependencies": {<%#cljs-deps.common%>
     "<%name%>": "^<%version%>"<%^last%>,<%/last%><%/cljs-deps.common%>
   },
