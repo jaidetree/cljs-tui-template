@@ -1,26 +1,27 @@
 (ns {{namespace}}
   (:require
    ["react-blessed" :as react-blessed]
-   [blessed :as blessed]
+   ["blessed" :as blessed]
    [cljs.nodejs :as nodejs]
    ;; TODO: Which of these do we need?
-   [{{main-ns}}.debug.views :as debug]
-   [{{main-ns}}.keys :as keys]
-   [{{main-ns}}.subs]
-   [{{main-ns}}.events]
-   [{{main-ns}}.views :as views]
-   [fs :as fs]
+   [my-test-project.debug.views :as debug]
+   [my-test-project.keys :as keys]
+   [my-test-project.subs]
+   [my-test-project.events]
+   [my-test-project.views :as views]
    [mount.core :refer [defstate] :as mount]
    [re-frame.core :as rf]
-   [reagent.core :as r]
-   [tty :as tty]))
+   [reagent.core :as r]))
+
+(def fs (js/require "fs"))
+(def tty (js/require "tty"))
 
 (mount/in-cljc-mode)
 
-(defstate tty-fd :start (fs/openSync "/dev/tty" "r+"))
+(defstate tty-fd :start (.openSync fs "/dev/tty" "r+"))
 (defstate program :start (blessed/program #js
-                                          {:input (tty/ReadStream @tty-fd)
-                                           :output (tty/WriteStream @tty-fd)}))
+                                          {:input (.ReadStream tty @tty-fd)
+                                           :output (.WriteStream tty @tty-fd)}))
 
 (defstate screen :start (doto
                          (blessed/screen #js {:program @program

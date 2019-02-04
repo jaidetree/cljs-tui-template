@@ -1,4 +1,3 @@
-;; This test runner is intended to be run from the command line
 (ns {{main-ns}}.test-runner
   (:require
     ;; require all the namespaces that you want to test
@@ -7,3 +6,5 @@
 
 (defn -main [& args]
   (run-tests-async 5000))
+
+(set! *main-cli-fn* nil)

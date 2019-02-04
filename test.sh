@@ -9,8 +9,8 @@ if [ -z "$1" ];
     name="${1:1}"
 fi;
 
-rm -rf "examples/$name"
-lein new cljs-cli my-test-project --to-dir examples/$name -- "$@"
+rm -rf examples/$name/*
+lein new cljs-cli my-test-project --force --to-dir examples/$name -- "$@"
 
 cat "examples/$name/package.json"
 if [ "$name" == "shadow" ];then
