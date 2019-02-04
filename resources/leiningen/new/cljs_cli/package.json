@@ -19,13 +19,13 @@
     "<%raw-name%>": "target/main.js"
   }<%#figwheel-main?%>,
   "scripts": {
-    "test": "",
+    "test": "lein fig:test",
     "init": "lein fig:build",
     "start": "lein fig:build",
     "repl": "lein repl"
   }<%/figwheel-main?%><%#lein-figwheel?%>,
   "scripts": {
-    "test": "",
+    "test": "lein cljsbuild once test && node target/test.js",
     "init": "lein figwheel",
     "start": "lein figwheel",
     "repl": "lein repl"

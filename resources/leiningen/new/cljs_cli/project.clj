@@ -32,6 +32,20 @@
                                                               :<%name%> "<%version%>"<%^last%>
                                                               <%/last%><%/cljs-deps.dev%>}
                                        :install-deps         true}}
+                       {:id           "test"
+                        :source-paths ["src" "test"]
+                        :figwheel     {:on-jsload "<%raw-name%>.core/main!"}
+                        :compiler     {:main <%raw-name%>.test-runner
+                                       :asset-path "target/js/compiled/test"
+                                       :output-to "target/test.js"
+                                       :output-dir "target/js/compiled/test"
+                                       :target :nodejs
+                                       :optimizations :none
+                                       :npm-deps             {<%#cljs-deps.common%>:<%name%> "<%version%>"<%^last%>
+                                                              <%/last%><%/cljs-deps.common%><%#cljs-deps.dev%>
+                                                              :<%name%> "<%version%>"<%^last%>
+                                                              <%/last%><%/cljs-deps.dev%>}
+                                       :install-deps         true}}
                        {:id           "prod"
                         :source-paths ["src"]
                         :compiler     {:main <%raw-name%>.core
