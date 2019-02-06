@@ -1,5 +1,5 @@
 {{=<% %>=}}
-{:source-paths ["src" "env/dev"]
+{:source-paths ["test" "src" "env/dev"]
  :dependencies [<%#clj-deps%>[<%name%> "<%version%>"<%#exclusions?%> :exclusions [<%#exclusions%>[<%name%>]<%^last%>
                                               <%/last%><%/exclusions%>]<%/exclusions?%>]<%^last%>
                 <%/last%><%/clj-deps%>]
@@ -10,5 +10,10 @@
                              :output-to        "target/js/compiled/<%raw-name%>.js"
                              :output-dir       "target/js/compiled/dev"}
                 :release    {:main             <%main-ns%>.core/main!
-                             :compiler-options {:optimizations :simple}}}}}
+                             :compiler-options {:optimizations :simple}}}
+          :test {:output-to "target/test.js"
+                 :output-dir "target/js/compiled/test"
+                 :target :node-test
+                 :ns-regexp "-test$"
+                 :autorun true}}}
 <%={{ }}=%>

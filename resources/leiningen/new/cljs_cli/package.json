@@ -31,7 +31,7 @@
     "repl": "lein repl"
   }<%/lein-figwheel?%><%#shadow?%>,
   "scripts": {
-    "test": "",
+    "test": "npx shadow-cljs compile test",
     "init": "npm install && npx shadow-cljs watch app",
     "repl": "npx shadow-cljs cljs-repl app"
   },
