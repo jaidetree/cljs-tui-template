@@ -1,0 +1,7 @@
+.shadow-cljs
+env
+scripts
+shadow-cljs.edn
+src
+target
+test

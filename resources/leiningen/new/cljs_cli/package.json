@@ -11,12 +11,13 @@
     "url": "https://github.com/FIXME/<%raw-name%>"
   },
   "directories": {
+    "bin": "bin",
     "doc": "docs",
-    "test": "test",
-    "target": "target"
+    "lib": "lib",
+    "src": "src"
   },
   "bin": {
-    "<%name%>": "target/main.js"
+    "<%name%>": "bin/<%name%>"
   }<%#figwheel-main?%>,
   "scripts": {
     "build": "lein fig:prod",

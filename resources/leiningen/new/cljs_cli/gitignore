@@ -8,6 +8,7 @@
 /checkouts
 /classes
 /node_modules
+/.shadow-cljs
 /target
 pom.xml
 pom.xml.asc

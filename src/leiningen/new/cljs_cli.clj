@@ -59,6 +59,7 @@
                               ["docs/intro.md"                            "docs/intro.md"]
                               ["env/dev/{{nested-dirs}}/app.cljs"         "env/dev/app.cljs"]
                               ["env/dev/{{nested-dirs}}/debug/views.cljs" "env/dev/debug/views.cljs"]
+                              [".npmignore"                               "npmignore"]
                               ["package.json"                             "package.json"]
                               ["LICENSE"                                  "LICENSE"]
                               ["README.md"                                "README.md"]
