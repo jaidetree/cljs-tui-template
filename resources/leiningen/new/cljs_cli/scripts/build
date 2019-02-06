@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+rm -rf bin
+mkdir bin
+{{#figwheel-main}}lein fig:prod
+{{/figwheel-main}}{{#lein-figwheel}}
+lein cljsbuild once prod{{/lein-figwheel}}{{#shadow?}}
+npx shadow-cljs release app{{/shadow?}}
+NODE_ENV=production npx loose-envify target/main.js > bin/{{name}}
+chmod +x bin/{{name}}
+echo "Built bin/{{name}}"

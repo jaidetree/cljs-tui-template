@@ -14,7 +14,7 @@
   :source-paths ["src"]<%#figwheel-main?%>
   :aliases {"fig"       ["trampoline" "run" "-m" "figwheel.main"]
             "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
-            "fig:min"   ["trampoline" "run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]
+            "fig:prod"  ["trampoline" "run" "-m" "figwheel.main" "-bo" "prod"]
             "fig:test"  ["trampoline" "run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" <%main-ns%>.test-runner]}
   <%/figwheel-main?%><%#lein-figwheel?%>
   :cljsbuild {:builds [{:id           "dev"

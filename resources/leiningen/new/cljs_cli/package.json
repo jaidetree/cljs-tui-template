@@ -16,24 +16,27 @@
     "target": "target"
   },
   "bin": {
-    "<%raw-name%>": "target/main.js"
+    "<%name%>": "target/main.js"
   }<%#figwheel-main?%>,
   "scripts": {
-    "test": "lein fig:test",
+    "build": "lein fig:prod",
     "init": "lein fig:build",
+    "repl": "lein repl",
     "start": "lein fig:build",
-    "repl": "lein repl"
+    "test": "lein fig:test"
   }<%/figwheel-main?%><%#lein-figwheel?%>,
   "scripts": {
-    "test": "lein cljsbuild once test && node target/test.js",
+    "build": "lein cljsbuild once prod",
     "init": "lein figwheel",
+    "repl": "lein repl",
     "start": "lein figwheel",
-    "repl": "lein repl"
+    "test": "lein cljsbuild once test && node target/test.js"
   }<%/lein-figwheel?%><%#shadow?%>,
   "scripts": {
-    "test": "npx shadow-cljs compile test",
+    "build": "./scripts/build",
     "init": "npm install && npx shadow-cljs watch app",
-    "repl": "npx shadow-cljs cljs-repl app"
+    "repl": "npx shadow-cljs cljs-repl app",
+    "test": "npx shadow-cljs compile test"
   },
   "dependencies": {<%#cljs-deps.common%>
     "<%name%>": "^<%version%>"<%^last%>,<%/last%><%/cljs-deps.common%>

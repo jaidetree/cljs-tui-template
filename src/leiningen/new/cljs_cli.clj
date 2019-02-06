@@ -1,5 +1,6 @@
 (ns leiningen.new.cljs-cli
-  (:require [leiningen.new.templates :refer [->files
+  (:require [clojure.java.io :as io]
+            [leiningen.new.templates :refer [->files
                                              date
                                              multi-segment
                                              name-to-path
@@ -48,7 +49,8 @@
                          '[[shadow-cljs               "2.7.24"]
                            [source-map-support        "0.5.10"]])
                 :dev    (format-deps
-                         '[[ws                        "6.1.2"]])})
+                         '[[loose-envify              "1.4.0"]
+                           [ws                        "6.1.2"]])})
 
 (def files {:common          [[".gitignore"                               "gitignore"]
                               [".hgignore"                                "hgignore"]
@@ -59,6 +61,7 @@
                               ["package.json"                             "package.json"]
                               ["LICENSE"                                  "LICENSE"]
                               ["README.md"                                "README.md"]
+                              ["scripts/build"                            "scripts/build"]
                               ["src/{{nested-dirs}}/core.cljs"            "src/core.cljs"]
                               ["src/{{nested-dirs}}/events.cljs"          "src/events.cljs"]
                               ["src/{{nested-dirs}}/keys.cljs"            "src/keys.cljs"]
@@ -115,7 +118,12 @@
          (mapcat #(get files %))
          (into (get files :common))
          (map #(render-template data %))
-         (apply ->files data))))
+         (apply ->files data))
+    (main/info "Updating script permissions.")
+    (intern 'leiningen.new.templates '*dir*)
+    (-> (str leiningen.new.templates/*dir* "/scripts/build")
+        (io/file)
+        (.setExecutable true))))
 
 (defn args-valid?
   [args]
@@ -156,7 +164,7 @@
 (defn cljs-cli
   "FIXME: write documentation"
   ([name]
-   (create-files name ["+figwheel-main"]))
+   (create-files name ["+shadow"]))
   ([name & args]
    (if (args-valid? args)
      (create-files name args)
