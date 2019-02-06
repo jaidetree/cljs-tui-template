@@ -54,6 +54,7 @@
 
 (def files {:common          [[".gitignore"                               "gitignore"]
                               [".hgignore"                                "hgignore"]
+                              ["bin/{{name}}"                             "bin.js"]
                               ["CHANGELOG.md"                             "CHANGELOG.md"]
                               ["docs/intro.md"                            "docs/intro.md"]
                               ["env/dev/{{nested-dirs}}/app.cljs"         "env/dev/app.cljs"]
@@ -96,6 +97,13 @@
   [data [dest template]]
   [dest (render template data)])
 
+(intern 'leiningen.new.templates '*dir*)
+(defn make-executable
+  [file]
+  (-> (str leiningen.new.templates/*dir* "/" file)
+      (io/file)
+      (.setExecutable true)))
+
 (defn create-files
   [name args]
   (let [render (renderer "cljs-cli")
@@ -120,10 +128,8 @@
          (map #(render-template data %))
          (apply ->files data))
     (main/info "Updating script permissions.")
-    (intern 'leiningen.new.templates '*dir*)
-    (-> (str leiningen.new.templates/*dir* "/scripts/build")
-        (io/file)
-        (.setExecutable true))))
+    (make-executable "scripts/build")
+    (make-executable (str "bin/" (:name data)))))
 
 (defn args-valid?
   [args]

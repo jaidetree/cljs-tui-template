@@ -2,12 +2,15 @@
 
 set -Eeuo pipefail
 
-rm -rf bin
-mkdir bin
+rm -rf lib
+mkdir lib
 {{#figwheel-main}}lein fig:prod
 {{/figwheel-main}}{{#lein-figwheel}}
 lein cljsbuild once prod{{/lein-figwheel}}{{#shadow?}}
 npx shadow-cljs release app{{/shadow?}}
-NODE_ENV=production npx loose-envify target/main.js > bin/{{name}}
+NODE_ENV=production npx loose-envify target/main.js > lib/main.js
 chmod +x bin/{{name}}
-echo "Built bin/{{name}}"
+tail -n +2 lib/main.js > lib/build.js
+rm lib/main.js
+mv lib/build.js lib/main.js
+echo "Built lib/main.js and prepared bin/{{name}}"
