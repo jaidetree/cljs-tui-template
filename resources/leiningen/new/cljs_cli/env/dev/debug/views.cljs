@@ -35,3 +35,7 @@
               :width  "100%"
               :height "100%"}
    [debug-box {:height 10}]])
+
+(defn clear-log!
+  []
+  (reset! logger {}))
