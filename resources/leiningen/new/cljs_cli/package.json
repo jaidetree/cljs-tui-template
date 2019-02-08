@@ -37,6 +37,7 @@
     "build": "./scripts/build",
     "init": "npm install && npx shadow-cljs watch app",
     "repl": "npx shadow-cljs cljs-repl app",
+    "start": "npx shadow-cljs watch app",
     "test": "npx shadow-cljs compile test"
   },
   "dependencies": {<%#cljs-deps.common%>
