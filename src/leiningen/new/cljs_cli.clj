@@ -32,6 +32,7 @@
 (def clj-deps (format-deps
                '[[org.clojure/clojure       "1.10.0"]
                  [org.clojure/clojurescript "1.10.516"]
+                 [org.clojure/tools.cli     "0.4.1"]
                  [mount                     "0.1.15"]
                  [reagent                   "0.8.1" :exclusions [[cljsjs/react]
                                                                  [cljsjs/react-dom]

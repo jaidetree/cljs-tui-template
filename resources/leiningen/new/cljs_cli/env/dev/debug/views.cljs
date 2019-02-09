@@ -14,6 +14,7 @@
     :height     n
     :style      {:fg :yellow :bg :grey}
     :scrollable true
+    :scrollbar true
     :content    (->> (take-last n @logger)
                      (clojure.string/join "\n"))}])
 

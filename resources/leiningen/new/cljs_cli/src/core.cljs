@@ -2,6 +2,7 @@
   (:require
    ["react-blessed" :as react-blessed]
    ["blessed" :as blessed]
+   [clojure.tools.cli :refer [parse-opts]]
    [cljs.nodejs :as nodejs]
    ;; TODO: Which of these do we need?
    [my-test-project.debug.views :as debug]
@@ -32,16 +33,31 @@
 
 (defonce render (react-blessed/createBlessedRenderer blessed))
 
+(def cli-options
+  [["-p" "--port PORT" "port number"
+    :default 80
+    :parse-fn #(js/Number %)
+    :validate [#(< 0 % 0x10000) "Must be a number between 0 and 65536"]]
+   ["-v" nil "Verbosity level"
+    :id :verbosity
+    :default 0
+    :update-fn inc]
+   ["-h" "--help"]])
+
+(defn args->opts
+  [args]
+  (parse-opts args cli-options))
+
 (defn init!
-  [view]
+  [view & {:keys [opts]}]
   (mount/start)
-  (rf/dispatch-sync [:init])
+  (rf/dispatch-sync [:init (:options opts)])
   (-> (r/reactify-component view)
       (r/create-element #js {})
       (render @screen)))
 
 (defn main!
-  []
-  (init! views/root))
+  [& args]
+  (init! views/root :opts (args->opts args)))
 
 (set! *main-cli-fn* main!)
