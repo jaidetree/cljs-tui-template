@@ -6,4 +6,5 @@
               :right  0
               :width  "100%"
               :height "100%"}
-   [debug/debug-box {:height 10}]])
+   [:text {:width   "40%"
+           :content "It works"}]])

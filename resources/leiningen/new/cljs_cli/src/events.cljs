@@ -3,8 +3,9 @@
 
 (rf/reg-event-db
   :init
-  (fn [_ _]
-    {:router/view :home}))
+  (fn [db [_ opts]]
+    {:router/view :home
+     :opts opts}))
 
 (rf/reg-event-db
   :update

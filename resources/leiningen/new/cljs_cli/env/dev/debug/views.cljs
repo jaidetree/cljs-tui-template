@@ -14,6 +14,7 @@
     :height     n
     :style      {:fg :yellow :bg :grey}
     :scrollable true
+    :scrollbar true
     :content    (->> (take-last n @logger)
                      (clojure.string/join "\n"))}])
 
@@ -35,3 +36,7 @@
               :width  "100%"
               :height "100%"}
    [debug-box {:height 10}]])
+
+(defn clear-log!
+  []
+  (reset! logger {}))
