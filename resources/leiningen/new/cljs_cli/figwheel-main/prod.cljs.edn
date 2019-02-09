@@ -6,8 +6,5 @@
  :target               :nodejs
  :optimizations        :simple
  :source-map           false
- :source-map-timestamp false
- :npm-deps             {<%#cljs-deps.common%>:<%name%> "<%version%>"<%^last%>
-                        <%/last%><%/cljs-deps.common%>}
- :install-deps         true}
+ :source-map-timestamp false}
 <%={{ }}=%>

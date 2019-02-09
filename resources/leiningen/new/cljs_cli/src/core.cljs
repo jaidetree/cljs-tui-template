@@ -1,7 +1,5 @@
 (ns {{namespace}}
   (:require
-   ["react-blessed" :as react-blessed]
-   ["blessed" :as blessed]
    [cljs.nodejs :as nodejs]
    ;; TODO: Which of these do we need?
    [my-test-project.debug.views :as debug]
@@ -13,24 +11,29 @@
    [re-frame.core :as rf]
    [reagent.core :as r]))
 
+(def blessed (js/require "blessed"))
 (def fs (js/require "fs"))
+(def react-blessed (js/require "react-blessed"))
 (def tty (js/require "tty"))
 
 (mount/in-cljc-mode)
 
 (defstate tty-fd :start (.openSync fs "/dev/tty" "r+"))
-(defstate program :start (blessed/program #js
-                                          {:input (.ReadStream tty @tty-fd)
-                                           :output (.WriteStream tty @tty-fd)}))
+(defstate program :start
+  (.program blessed #js
+            {:input (.ReadStream tty @tty-fd)
+             :output (.WriteStream tty @tty-fd)}))
 
-(defstate screen :start (doto
-                         (blessed/screen #js {:program @program
-                                              :autoPadding true
-                                              :smartCSR true
-                                              :title "{{name}}"})
-                         keys/setup))
+(defstate screen :start
+  (doto
+    (.screen blessed #js
+             {:program @program
+              :autoPadding true
+              :smartCSR true
+              :title "{{name}}"})
+    keys/setup))
 
-(defonce render (react-blessed/createBlessedRenderer blessed))
+(defonce render (.createBlessedRenderer react-blessed blessed))
 
 (defn init!
   [view]

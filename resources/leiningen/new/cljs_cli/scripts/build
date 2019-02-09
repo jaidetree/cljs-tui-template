@@ -4,9 +4,9 @@ set -Eeuo pipefail
 
 rm -rf lib
 mkdir lib
-{{#figwheel-main}}lein fig:prod
-{{/figwheel-main}}{{#lein-figwheel}}
-lein cljsbuild once prod{{/lein-figwheel}}{{#shadow?}}
+{{#figwheel-main?}}lein fig:prod
+{{/figwheel-main?}}{{#lein-figwheel?}}
+lein cljsbuild once prod{{/lein-figwheel?}}{{#shadow?}}
 npx shadow-cljs release app{{/shadow?}}
 NODE_ENV=production npx loose-envify target/main.js > lib/main.js
 chmod +x bin/{{name}}

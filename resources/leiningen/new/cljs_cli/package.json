@@ -20,15 +20,15 @@
     "<%name%>": "bin/<%name%>"
   }<%#figwheel-main?%>,
   "scripts": {
-    "build": "lein fig:prod",
-    "init": "lein fig:build",
+    "build": "./scripts/build",
+    "init": "npm install && lein fig:build",
     "repl": "lein repl",
     "start": "lein fig:build",
     "test": "lein fig:test"
   }<%/figwheel-main?%><%#lein-figwheel?%>,
   "scripts": {
-    "build": "lein cljsbuild once prod",
-    "init": "lein figwheel",
+    "build": "./scripts/build",
+    "init": "npm install && lein figwheel",
     "repl": "lein repl",
     "start": "lein figwheel",
     "test": "lein cljsbuild once test && node target/test.js"
@@ -38,13 +38,13 @@
     "init": "npm install && npx shadow-cljs watch app",
     "repl": "npx shadow-cljs cljs-repl app",
     "test": "npx shadow-cljs compile test"
-  },
+  }<%/shadow?%>,
   "dependencies": {<%#cljs-deps.common%>
     "<%name%>": "^<%version%>"<%^last%>,<%/last%><%/cljs-deps.common%>
   },
   "devDependencies": {<%#cljs-deps.dev%>
-    "<%name%>": "^<%version%>",<%/cljs-deps.dev%><%#cljs-deps.shadow%>
-    "<%name%>": "^<%version%>"<%^last%>,<%/last%><%/cljs-deps.shadow%>
-  }<%/shadow?%>
+    "<%name%>": "^<%version%>"<%^last%>,<%/last%><%/cljs-deps.dev%><%#shadow?%>,<%#cljs-deps.shadow%>
+    "<%name%>": "^<%version%>"<%^last%>,<%/last%><%/cljs-deps.shadow%><%/shadow?%>
+  }
 }
 <%={{ }}=%>

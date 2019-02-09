@@ -6,10 +6,6 @@
  :output-dir           "target/js/compiled/dev"
  :target               :nodejs
  :optimizations        :none
- :source-map-timestamp true
- :npm-deps             {<%#cljs-deps.common%>:<%name%> "<%version%>"<%^last%>
-                        <%/last%><%/cljs-deps.common%><%#cljs-deps.dev%>
-                        :<%name%> "<%version%>"<%^last%>
-                        <%/last%><%/cljs-deps.dev%>}
- :install-deps         true}
+ :source-map           true
+ :source-map-timestamp true}
 <%={{ }}=%>
