@@ -2,8 +2,6 @@
   (:require
    [clojure.tools.cli :refer [parse-opts]]
    [cljs.nodejs :as nodejs]
-   ;; TODO: Which of these do we need?
-   [my-test-project.debug.views :as debug]
    [my-test-project.keys :as keys]
    [my-test-project.subs]
    [my-test-project.events]
