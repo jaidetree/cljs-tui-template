@@ -57,6 +57,12 @@
       (r/create-element #js {})
       (render @screen)))
 
+(defn reload!
+  [view]
+  (-> (r/reactify-component view)
+      (r/create-element #js {})
+      (render @screen)))
+
 (defn main!
   [& args]
   (init! views/root :opts (args->opts args)))
