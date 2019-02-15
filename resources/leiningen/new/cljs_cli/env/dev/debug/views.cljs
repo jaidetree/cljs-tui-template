@@ -52,7 +52,7 @@
               :width  "100%"
               :height "100%"}
    [router {:views {:home home}
-            :view @(rf/subscribe [:db :router/view])}]
+            :view (:router/view @(rf/subscribe [:db]))}]
    [debug-box {:height 10}]])
 
 (defn clear-log!

@@ -1,5 +1,4 @@
-(ns {{main-ns}}.views
-  (:require [{{main-ns}}.debug.views :as debug]))
+(ns {{main-ns}}.views)
 
 (defn router
   [{:keys [views view] :as props}]
