@@ -11,7 +11,7 @@
   [& args]
   (swap! debug/logger conj (clojure.string/join " " args)))
 
-(defn {{#figwheel-main?}}^:after-load {{/figwheel-main}}?reload!
+(defn {{#figwheel-main?}}^:after-load {{/figwheel-main?}}reload!
   []
   (println "Reloading app")
   (core/reload! debug/root))

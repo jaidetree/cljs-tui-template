@@ -19,26 +19,26 @@
   <%/figwheel-main?%><%#lein-figwheel?%>
   :cljsbuild {:builds [{:id           "dev"
                         :source-paths ["src" "env/dev"]
-                        :figwheel     {:on-jsload "<%raw-name%>.core/load"}
-                        :compiler     {:main <%raw-name%>.app
-                                       :asset-path "target/js/compiled/dev"
-                                       :output-to "target/js/compiled/<%raw-name%>.js"
-                                       :output-dir "target/js/compiled/dev"
-                                       :target :nodejs
-                                       :optimizations :none
+                        :figwheel     {:on-jsload            <%raw-name%>.app/reload!}
+                        :compiler     {:main                 <%raw-name%>.app
+                                       :asset-path           "target/js/compiled/dev"
+                                       :output-to            "target/js/compiled/<%raw-name%>.js"
+                                       :output-dir           "target/js/compiled/dev"
+                                       :target               :nodejs
+                                       :optimizations        :none
                                        :source-map-timestamp true}}
                        {:id           "test"
                         :source-paths ["src" "test"]
-                        :figwheel     {:on-jsload "<%raw-name%>.core/main!"}
-                        :compiler     {:main <%raw-name%>.test-runner
-                                       :asset-path "target/js/compiled/test"
-                                       :output-to "target/test.js"
-                                       :output-dir "target/js/compiled/test"
-                                       :target :nodejs
+                        :figwheel     {:on-jsload     <%raw-name%>.test-runner/main!}
+                        :compiler     {:main          <%raw-name%>.test-runner
+                                       :asset-path    "target/js/compiled/test"
+                                       :output-to     "target/test.js"
+                                       :output-dir    "target/js/compiled/test"
+                                       :target        :nodejs
                                        :optimizations :none}}
                        {:id           "prod"
                         :source-paths ["src"]
-                        :compiler     {:main <%raw-name%>.core
+                        :compiler     {:main          <%raw-name%>.core
                                        :output-to     "target/main.js"
                                        :output-dir    "target/js/compiled/prod"
                                        :target        :nodejs
