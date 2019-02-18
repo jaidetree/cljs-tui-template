@@ -1,7 +1,8 @@
 (ns {{namespace}}
   (:require
    [cljs.nodejs :as nodejs]
-   [mount.core :refer [defstate]]))
+   [mount.core :refer [defstate] :as mount]
+   [{{main-ns}}.keys :as keys]))
 
 (def blessed (js/require "blessed"))
 (def fs (js/require "fs"))

@@ -1,5 +1,5 @@
 (ns {{main-ns}}.keys
-  (:require-macro
+  (:require-macros
    [reagent.core :refer [with-let]])
   (:require
    [{{main-ns}}.core :refer [screen]]))

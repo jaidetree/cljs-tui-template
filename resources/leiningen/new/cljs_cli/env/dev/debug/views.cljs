@@ -1,4 +1,5 @@
 (ns {{main-ns}}.debug.views
+  (:require [{{main-nes}}.keys :refer [with-keys]])
   (:require [re-frame.core :as rf]
             [reagent.core :as r]
             [{{main-ns}}.views :refer [router]]))
@@ -34,16 +35,22 @@
 
 (defn home
   [_]
-  [:box#home
-   {:top 0
-    :left 0
-    :width "100%"
-    :height 10
-    :style {:border {:fg :green}}
-    :border {:type :line}
-    :label "Home"}
-   [:text {:width "50%"
-           :content "Welcome home"}]])
+  (with-keys {["g"]                #(rf/dispatch [:movement/first])
+              ["S-g"]              #(rf/dispatch [:movement/last])
+              ["h" "left" "C-a"]   #(rf/dispatch [:movement/left])
+              ["j" "down" "C-n"]   #(rf/dispatch [:movement/down])
+              ["k" "up" "C-p"]     #(rf/dispatch [:movement/up])
+              ["l" "right" "C-e"]  #(rf/dispatch [:movement/right])}
+    [:box#home
+     {:top 0
+      :left 0
+      :width "100%"
+      :height 10
+      :style {:border {:fg :green}}
+      :border {:type :line}
+      :label "Home"}
+     [:text {:width "50%"
+             :content "Welcome home"}]]))
 
 
 (defn root [_]

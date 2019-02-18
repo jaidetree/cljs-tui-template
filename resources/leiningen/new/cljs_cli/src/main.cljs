@@ -6,7 +6,6 @@
    [reagent.core :as r]
    [{{main-ns}}.core :refer [render screen]]
    [{{main-ns}}.events]
-   [{{main-ns}}.keys :as keys]
    [{{main-ns}}.subs]
    [{{main-ns}}.views :as views]))
 
