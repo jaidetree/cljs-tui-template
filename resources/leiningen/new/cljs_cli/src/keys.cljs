@@ -1,5 +1,7 @@
 (ns {{main-ns}}.keys
-  (:require [re-frame.core :as rf]))
+  (:require
+   [re-frame.core :as rf]
+   [reagent.core :as r]))
 
 (def bindings
   {["escape" "q" "C-c"] #(.exit js/process 0)

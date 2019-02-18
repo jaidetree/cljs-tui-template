@@ -10,7 +10,7 @@
                 :dev        {:main             <%main-ns%>.app/main!
                              :output-to        "target/js/compiled/<%raw-name%>.js"
                              :output-dir       "target/js/compiled/dev"}
-                :release    {:main             <%main-ns%>.core/main!
+                :release    {:main             <%main-ns%>.main/main!
                              :compiler-options {:optimizations :simple}}}
           :test {:output-to "target/test.js"
                  :output-dir "target/js/compiled/test"

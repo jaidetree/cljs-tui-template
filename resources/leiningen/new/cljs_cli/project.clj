@@ -38,7 +38,7 @@
                                        :optimizations :none}}
                        {:id           "prod"
                         :source-paths ["src"]
-                        :compiler     {:main          <%raw-name%>.core
+                        :compiler     {:main          <%raw-name%>.main
                                        :output-to     "target/main.js"
                                        :output-dir    "target/js/compiled/prod"
                                        :target        :nodejs

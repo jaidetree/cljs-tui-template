@@ -1,6 +1,6 @@
 {{=<% %>=}}
 ^{:watch-dirs ["src"]}
-{:main <%main-ns%>.core
+{:main <%main-ns%>.main
  :output-to            "target/main.js"
  :output-dir           "target/js/compiled/prod"
  :target               :nodejs

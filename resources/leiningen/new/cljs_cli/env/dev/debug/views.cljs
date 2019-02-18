@@ -18,7 +18,7 @@
     :scrollbar    true
     :alwaysScroll true
     :content      (->> (take-last n @logger)
-                      (clojure.string/join "\n"))}])
+                       (clojure.string/join "\n"))}])
 
 (defn debug-box
   [{:keys [height]}]
