@@ -3,7 +3,8 @@
             [reagent.core :as r]
             [{{main-ns}}.core :refer [screen]]
             [{{main-ns}}.keys :refer [with-keys]]
-            [{{main-ns}}.views :refer [router]]))
+            [{{main-ns}}.views :refer [router]]
+            [{{main-ns}}.views.menus :refer [vertical-menu]]))
 
 (defonce logger
   (r/atom []))
@@ -50,8 +51,10 @@
       :style {:border {:fg :green}}
       :border {:type :line}
       :label "Home"}
-     [:text {:width "50%"
-             :content "Welcome home"}]]))
+     [vertical-menu {:options {:about "About"
+                               :help "Help"
+                               :library "Library"}
+                     :on-select #(rf/dispatch [:update {:router/view %}])}]]))
 
 (defn about
   [_]
@@ -63,9 +66,9 @@
       :height 10
       :style {:border {:fg :blue}}
       :border {:type :line}
-      :label "About"
-      [:text {:width "50%"
-              :content "About this app"}]}]))
+      :label "About"}
+     [:text {:width "50%"
+             :content "About this app"}]]))
 
 (defn root [_]
   [:box#base {:left   0
