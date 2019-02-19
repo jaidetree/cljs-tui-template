@@ -1,11 +1,9 @@
 (ns {{main-ns}}.keys
   (:require-macros
-   [reagent.core :refer [with-let]])
-  (:require
-   [{{main-ns}}.core :refer [screen]]))
+   [reagent.core :refer [with-let]]))
 
 (defmacro with-keys
-  [key-bindings & body]
+  [screen key-bindings & body]
   `(with-let []
      ~@body
      (finally
