@@ -67,7 +67,6 @@
                               ["scripts/build"                            "scripts/build"]
                               ["src/{{nested-dirs}}/core.cljs"            "src/core.cljs"]
                               ["src/{{nested-dirs}}/events.cljs"          "src/events.cljs"]
-                              ["src/{{nested-dirs}}/keys.cljc"            "src/keys.cljc"]
                               ["src/{{nested-dirs}}/keys.cljs"            "src/keys.cljs"]
                               ["src/{{nested-dirs}}/main.cljs"            "src/main.cljs"]
                               ["src/{{nested-dirs}}/subs.cljs"            "src/subs.cljs"]
