@@ -8,8 +8,13 @@
 (defonce logger
   (r/atom []))
 
+(defn log-height
+  [screen]
+  (- (/ (.-rows screen) 2)
+     2))
+
 (defn log-box
-  [n]
+  []
   [:text#log
    {:top          0
     :bottom       0
@@ -19,7 +24,7 @@
     :scrollable   true
     :scrollbar    true
     :alwaysScroll true
-    :content      (->> (take-last n @logger)
+    :content      (->> (take-last (log-height @screen) @logger)
                        (clojure.string/join "\n"))}])
 
 (defn debug-box
@@ -33,7 +38,7 @@
                 :label  "Debug info"}
    [:text {:width   "40%"
            :content (str @(rf/subscribe [:db]))}]
-   [log-box 10]])
+   [log-box]])
 
 (defn home
   [_]
