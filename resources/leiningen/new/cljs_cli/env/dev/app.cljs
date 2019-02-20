@@ -1,20 +1,24 @@
 (ns {{#figwheel-main?}}^:figwheel-hooks {{/figwheel-main?}}{{main-ns}}.app
   (:require
-   [{{main-ns}}.main :as main]
-   [{{main-ns}}.debug.views :as debug]))
+   [reagent.core :as r]
+   [{{main-ns}}.core :refer [render screen]]
+   [{{main-ns}}.debug.views :as debug]
+   [{{main-ns}}.main :as main]))
 
 (defn main!
   [& args]
-  (main/init! debug/root :opts (main/args->opts args)))
+  (main/init! debug/ui :opts (main/args->opts args)))
 
 (defn log-fn
   [& args]
   (swap! debug/logger conj (clojure.string/join " " args)))
 
 (defn {{#figwheel-main?}}^:after-load {{/figwheel-main?}}reload!
-  []
-  (println "Reloading app")
-  (main/reload! debug/root))
+  [_]
+  (-> (r/reactify-component debug/ui)
+      (r/create-element #js {})
+      (render @screen))
+  (println "Reloading app"))
 
 (set! (.-log js/console) log-fn)
 (set! (.-error js/console) log-fn)

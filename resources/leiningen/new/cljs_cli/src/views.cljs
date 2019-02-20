@@ -58,11 +58,3 @@
                           :fg (when (= value current) (or fg :white))}
                   :height 1
                   :content label}])]))))
-
-(defn root [_]
-  [:box#base {:left   0
-              :right  0
-              :width  "100%"
-              :height "100%"}
-   [:text {:width   "40%"
-           :content "It works"}]])

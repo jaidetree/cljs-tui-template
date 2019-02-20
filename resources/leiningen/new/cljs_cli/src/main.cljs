@@ -5,9 +5,15 @@
    [re-frame.core :as rf]
    [reagent.core :as r]
    [{{main-ns}}.core :refer [render screen]]
+   [{{main-ns}}.demo.views :refer [demo]]
    [{{main-ns}}.events]
    [{{main-ns}}.subs]
    [{{main-ns}}.views :as views]))
+
+(defn ui
+  [_]
+  (let [view (:router/view @(rf/subscribe [:db]))]
+    [demo {:view view}]))
 
 (def cli-options
   [["-p" "--port PORT" "port number"
@@ -32,14 +38,8 @@
       (r/create-element #js {})
       (render @screen)))
 
-(defn reload!
-  [view]
-  (-> (r/reactify-component view)
-      (r/create-element #js {})
-      (render @screen)))
-
 (defn main!
   [& args]
-  (init! views/root :opts (args->opts args)))
+  (init! ui :opts (args->opts args)))
 
 (set! *main-cli-fn* main!)
