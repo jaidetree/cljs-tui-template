@@ -51,8 +51,7 @@
      :right 1}
     [:box
      {:align :center
-      :content "Welcome, you are successfully running the app. Happy hacking!"
-      :style {:fg :green}}]
+      :content "Welcome, you are successfully running the app. Happy hacking!"}]
     [vertical-menu {:options {:about "About"
                               :resources "Resources"
                               :credits "Credits"}
