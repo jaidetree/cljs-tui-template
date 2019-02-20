@@ -1,9 +1,12 @@
 (ns {{main-ns}}.debug.views
-  (:require [re-frame.core :as rf]
-            [reagent.core :as r]
-            [{{main-ns}}.core :refer [screen]]
-            [{{main-ns}}.keys :refer [with-keys]]
-            [{{main-ns}}.views :refer [router vertical-menu]]))
+  (:require
+   [clojure.pprint :refer [pprint]]
+   [clojure.string :refer [join]]
+   [re-frame.core :as rf]
+   [reagent.core :as r]
+   [{{main-ns}}.core :refer [screen]]
+   [{{main-ns}}.keys :refer [with-keys]]
+   [{{main-ns}}.views :refer [router vertical-menu]]))
 
 (defonce logger
   (r/atom []))
@@ -11,21 +14,28 @@
 (defn log-height
   [screen]
   (- (/ (.-rows screen) 2)
-     2))
+     3))
 
 (defn log-box
   []
-  [:text#log
+  [:box#log
    {:top          0
     :bottom       0
     :right        0
     :width        "50%"
-    :style        {:fg :yellow :bg :grey}
+    :style        {:fg :yellow
+                   :bg :grey}
     :scrollable   true
     :scrollbar    true
-    :alwaysScroll true
-    :content      (->> (take-last (log-height @screen) @logger)
-                       (clojure.string/join "\n"))}])
+    :alwaysScroll true}
+   [:text {:left    1
+           :top     0
+           :bottom  0
+           :right   1
+           :style   {:fg :yellow
+                     :bg :grey}
+           :content (->> (take-last (log-height @screen) @logger)
+                         (join "\n"))}]])
 
 (defn debug-box
   []
@@ -36,89 +46,151 @@
                 :style  {:border {:fg :yellow}}
                 :border {:type :line}
                 :label  "Debug info"}
-   [:text {:width   "40%"
-           :content (str @(rf/subscribe [:db]))}]
+   [:box {:width   "48%"
+          :top 1
+          :left 1
+          :bottom 1
+          :content (with-out-str (pprint @(rf/subscribe [:db])))}]
    [log-box]])
+
+(defn navbar
+  [_]
+  [:box#home
+   {:top    0
+    :left   0
+    :width  "30%"
+    :height "50%"
+    :style  {:border {:fg :cyan}}
+    :border {:type :line}
+    :label  " Menu "}
+   [vertical-menu {:options {:home "Intro"
+                             :about "About"
+                             :resources "Resources"
+                             :credits "Credits"}
+                   :bg :magenta
+                   :fg :black
+                   :on-select #(rf/dispatch [:update {:router/view %}])}]])
 
 (defn home
   [_]
   [:box#home
    {:top 0
-    :left 0
-    :width "100%"
+    :right 0
+    :width "70%"
     :height "50%"
-    :style {:border {:fg :green}}
+    :style {:border {:fg :magenta}}
     :border {:type :line}
-    :label " Home "}
+    :label " Intro "}
    [:box#content
     {:top 1
      :left 1
      :right 1}
     [:box
      {:align :center
-      :content "Welcome, you are successfully running the app. Happy hacking!"}]
-    [vertical-menu {:options {:about "About"
-                              :resources "Resources"
-                              :credits "Credits"}
-                    :on-select #(rf/dispatch [:update {:router/view %}])
-                    :props {:top 2
-                            :left 0
-                            :right 0}}]
+      :style {:fg :yellow}
+      :content "Welcome, you are successfully running the app.\nHappy hacking!"}]
     [:box#keys
      {:top 6
+      :left 2
+      :right 2
       :width "100%"
-      :align :center
-      :style {:padding 1
-              :fg :yellow}
-      :content "( j/up or k/down to move, enter to select. Enter or backspace to return. )"}]]])
+      :align :left
+      :content "Usage:\n\n  - j/k or up/down to select a page\n  - enter or l to view page"}]]])
 
 (defn about
   [_]
-  (with-keys @screen {["h" "backspace" "return"] #(rf/dispatch [:update {:router/view :home}])}
-    [:box#about
-     {:top 0
-      :left 0
-      :width "100%"
-      :height 10
-      :style {:border {:fg :blue}}
-      :border {:type :line}
-      :label " About "}
-     [:text {:width "50%"
-             :content "About this app"}]]))
+  [:box#about
+   {:top 0
+    :right 0
+    :width "70%"
+    :height "50%"
+    :style {:border {:fg :blue}}
+    :border {:type :line}
+    :label " About "}
+   [:box#content
+    {:top 1
+     :left 1
+     :right 1
+     :bottom 1}
+    [:text {:content "This is a sample app using the leiningen cljs-cli template:"}]
+    [:box {:top 3
+           :align :center
+           :style {:fg :green}
+           :content "https://github.com/eccentric-j/cljs-cli-template"}]
+    [:text {:top 5
+            :align :center
+            :content  (join "\n  - "
+                        ["Features:\n"
+                         "Use ClojureScript and functional programming\n    to deliver rich CLIs quickly"
+                         "Manage your state and side-effects with re-frame"
+                         "Compose simple view functions into a rich UI\n    with Reagent React views"
+                         "Use web technologies you are already familiar with"
+                         "Faster start up time with node"
+                         "Supports shadow, figwheel-main, or lein-figwheel"])}]]])
 
 (defn resources
   [_]
-  (with-keys @screen {["h" "backspace" "return"] #(rf/dispatch [:update {:router/view :home}])}
-    [:box#about
-     {:top 0
-      :left 0
-      :width "100%"
-      :height "50%"
-      :style {:border {:fg :cyan}}
-      :border {:type :line}
-      :label " Resources "}
-     [:text {:width "50%"
-             :content "Resources"}]]))
+  [:box#about
+   {:top 0
+    :right 0
+    :width "70%"
+    :height "50%"
+    :style {:border {:fg :red}}
+    :border {:type :line}
+    :label " Resources "}
+   [:box#content
+    {:top 1
+     :left 1
+     :right 1
+     :bottom 1}
+    [:text (join "\n  - "
+                 ["Learn more about the technology behind this powerful ClojureScript template:\n"
+                  "https://clojurescript.org/"
+                  "https://github.com/chjj/blessed"
+                  "https://github.com/Yomguithereal/react-blessed"
+                  "https://reagent-project.github.io/"
+                  "https://shadow-cljs.org/"
+                  "https://figwheel.org/"
+                  "https://github.com/bhauman/lein-figwheel"])]]])
 
 (defn credits
   [_]
-  (with-keys @screen {["h" "backspace" "return"] #(rf/dispatch [:update {:router/view :home}])}
-    [:box#about
-     {:top 0
-      :left 0
-      :width "100%"
-      :height "50%"
-      :style {:border {:fg :magenta}}
-      :border {:type :line}
-      :label " Credits "}
-     [:text {:width "50%"
-             :content "Resources"}]]))
+  [:box#about
+   {:top 0
+    :right 0
+    :width "70%"
+    :height "50%"
+    :style {:border {:fg :yellow}}
+    :border {:type :line}
+    :label " Credits "}
+   [:box#content
+    {:top 1
+     :left 1
+     :right 1
+     :bottom 1}
+    [:text (join "\n  - "
+                 ["This whole project would not exist without Denis Isidoro and his Floki project. A lightbulb lit up and I knew I had to make a template based on the stack he used to create Floki."])]
+    [:box
+     {:top 5
+      :align :center
+      :content "https://github.com/denisidoro/floki"}]
+    [:text
+     {:top 8}
+     (join "\n  - "
+           ["This template was created by Eccentric J and is open sourced on github. You can use the Clojure leiningen tool to generate a template."])]
+    [:box
+     {:top 12
+      :left 4
+      :align :left
+      :content "https://github.com/eccentric-j/cljs-cli-template\nhttps://eccentric-j.com/"}]]])
+
 
 (defn root [_]
   [:box#base {:left   0
               :right  0
               :width  "100%"
               :height "100%"}
+   [navbar]
    [router {:views {:home home
                     :about about
                     :resources resources

@@ -38,22 +38,24 @@
         (key))))
 
 (defn vertical-menu
-  [{:keys [options default on-select]}]
+  [{:keys [bg default fg on-select options props]}]
   (r/with-let [selected (r/atom (or default (->> options first key)))]
-    (with-keys @screen {["j"] #(swap! selected next-option options)
-                        ["k"] #(swap! selected prev-option options)
-                        ["enter"] #(on-select @selected)}
+    (with-keys @screen {["j" "down"] #(swap! selected next-option options)
+                        ["k" "up"] #(swap! selected prev-option options)
+                        ["l" "enter"] #(on-select @selected)}
       (let [current @selected]
         [:box#menu
-         {:top 1
-          :left 1
-          :right 1
-          :bottom 1}
+         (merge
+          {:top 1
+           :left 1
+           :right 1
+           :bottom 1}
+          props)
          (for [[idx [value label]] (map-indexed vector options)]
            [:box {:key value
                   :top idx
-                  :style {:bg (when (= value current) :green)
-                          :fg (when (= value current) :white)}
+                  :style {:bg (when (= value current) (or bg :green))
+                          :fg (when (= value current) (or fg :white))}
                   :height 1
                   :content label}])]))))
 

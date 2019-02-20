@@ -71,7 +71,6 @@
                               ["src/{{nested-dirs}}/main.cljs"            "src/main.cljs"]
                               ["src/{{nested-dirs}}/subs.cljs"            "src/subs.cljs"]
                               ["src/{{nested-dirs}}/views.cljs"           "src/views.cljs"]
-                              ["src/{{nested-dirs}}/views/menus.cljs"     "src/views/menus.cljs"]
                               ["test/{{nested-dirs}}/core_test.cljs"      "test/core_test.cljs"]]
 
             "+lein-figwheel" [["env/dev/user.clj"                      "lein-figwheel/env/dev/user.clj"]
