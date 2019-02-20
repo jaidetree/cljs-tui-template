@@ -4,7 +4,7 @@
 (rf/reg-event-db
   :init
   (fn [db [_ opts]]
-    {:router/view :home
+    {:router/view :loading
      :opts opts}))
 
 (rf/reg-event-db

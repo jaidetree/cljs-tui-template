@@ -90,10 +90,9 @@
       :style {:fg :yellow}
       :content "Welcome, you are successfully running the app.\nHappy hacking!"}]
     [:box#keys
-     {:top 6
+     {:top 5
       :left 2
       :right 2
-      :width "100%"
       :align :left
       :content "Usage:\n\n  - j/k or up/down to select a page\n  - enter or l to view page"}]]])
 
@@ -184,19 +183,55 @@
       :align :left
       :content "https://github.com/eccentric-j/cljs-cli-template\nhttps://eccentric-j.com/"}]]])
 
+(defn loader
+  [_]
+  (r/with-let [progress (r/atom 0)
+               interval (js/setInterval #(swap! progress inc) 10)]
+    (when (>= @progress 100)
+      (js/clearInterval interval)
+      (rf/dispatch [:update {:router/view :home}]))
+    [:box#loader
+     {:top 0
+      :width "100%"}
+     [:box
+      {:top 1
+       :width "100%"
+       :align :center
+       :content "Loading Demo"}]
+     [:box
+      {:top 2
+       :width "100%"
+       :align :center
+       :style {:fg :gray}
+       :content "Slow reveal for dramatic effect..."}]
+     [:progressbar
+      {:orientation :horizontal
+       :style {:bar {:bg :magenta}
+               :border {:fg :cyan}
+               :padding 1}
+       :border {:type :line}
+       :filled @progress
+       :left 0
+       :right 0
+       :width "100%"
+       :height 3
+       :top 4
+       :label " progress "}]]))
 
 (defn root [_]
-  [:box#base {:left   0
-              :right  0
-              :width  "100%"
-              :height "100%"}
-   [navbar]
-   [router {:views {:home home
-                    :about about
-                    :resources resources
-                    :credits credits}
-            :view (:router/view @(rf/subscribe [:db]))}]
-   [debug-box]])
+  (let [view (:router/view @(rf/subscribe [:db]))]
+    [:box#base {:left   0
+                :right  0
+                :width  "100%"
+                :height "100%"}
+     (when (not= view :loader) [navbar])
+     [router {:views {:loader loader
+                      :home home
+                      :about about
+                      :resources resources
+                      :credits credits}
+              :view (:router/view @(rf/subscribe [:db]))}]
+     [debug-box]]))
 
 (defn clear-log!
   []
