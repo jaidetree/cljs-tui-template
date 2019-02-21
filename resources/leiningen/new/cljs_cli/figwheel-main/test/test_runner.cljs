@@ -5,6 +5,7 @@
     [figwheel.main.testing :refer [run-tests-async]]))
 
 (defn -main [& args]
+  "Tests entrypoint. Runs imported tests."
   (run-tests-async 5000))
 
 (set! *main-cli-fn* nil)

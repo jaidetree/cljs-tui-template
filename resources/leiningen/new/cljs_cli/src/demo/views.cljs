@@ -7,6 +7,10 @@
    [{{main-ns}}.views :refer [router vertical-menu]]))
 
 (defn navbar
+  "Display a box with a border and an interactive vertical-menu.
+  User can use j/k or up/down to navigate items and either enter or l to view
+  a page. Dispatches re-frame :update to set :router/view in app db.
+  Returns a hiccup :box element."
   [_]
   [:box#home
    {:top    0
@@ -25,6 +29,9 @@
                    :on-select #(rf/dispatch [:update {:router/view %}])}]])
 
 (defn home
+  "Intro page with welcome message and usage bindings.
+  Takes no arguments.
+  Returns hiccup :box element."
   [_]
   [:box#home
    {:top 0
@@ -50,6 +57,9 @@
       :content "Usage:\n\n  - j/k or up/down to select a page\n  - enter or l to view page"}]]])
 
 (defn about
+  "About page to explain project and features.
+  Takes no arguments.
+  Returns hiccup :box element."
   [_]
   [:box#about
    {:top 0
@@ -81,6 +91,9 @@
                          "Supports shadow, figwheel-main, or lein-figwheel"])}]]])
 
 (defn resources
+  "Resources page shares links to learn more about this project.
+  Takes no arguments.
+  Returns hiccup :box element."
   [_]
   [:box#about
    {:top 0
@@ -106,6 +119,9 @@
                   "https://github.com/bhauman/lein-figwheel"])]]])
 
 (defn credits
+  "Credits page to give proper credit to the inspiration for this project.
+  Takes no arguments.
+  Returns hiccup :box element."
   [_]
   [:box#about
    {:top 0
@@ -137,9 +153,16 @@
       :content "https://github.com/eccentric-j/cljs-cli-template\nhttps://eccentric-j.com/"}]]])
 
 (defn loader
+  "Shows a mock-loader progress bar for dramatic effect.
+  Uses with-let to create a progress atom and an interval to update it every
+  15 ms until progress is 100.
+  Starts the timer on each mount.
+  Navigates to home page when completed.
+  Takes no arguments.
+  Returns hiccup :box element."
   [_]
   (r/with-let [progress (r/atom 0)
-               interval (js/setInterval #(swap! progress inc) 10)]
+               interval (js/setInterval #(swap! progress inc) 15)]
     (when (>= @progress 100)
       (js/clearInterval interval)
       (rf/dispatch [:update {:router/view :home}]))
@@ -172,6 +195,10 @@
        :label " progress "}]]))
 
 (defn demo
+  "Takes props hash-map and a child element to display.
+  Props should contain a :view keyword mapped to the current view to display
+  such as :loader or :home.
+  Returns hiccup :box element."
   [{:keys [view]} child]
   [:box#base {:left   0
               :right  0
