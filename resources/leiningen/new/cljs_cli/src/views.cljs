@@ -9,6 +9,7 @@
   "Takes a map of props:
   :views map     - Map of values (usually keywords) to hiccup view functions
   :view  keyword - Current view to display. Should be the key of :views map
+
   Returns the hiccup element the current view-fn returns.
 
   Example:
@@ -57,6 +58,7 @@
 
 (defn vertical-menu
   "Display an interactive vertical-menu component.
+
   Takes a hash-map of props:
   :bg        keyword|str - Background color of highlighted item.
   :box       hash-map    - Map of props to merge into menu box properties.
@@ -64,6 +66,7 @@
   :fg        keyword|str - Text color of highlighted item.
   :on-select function    - Function to call when item is selected
   :options   hash-map    - Map of keyword keys to item labels
+
   Returns a reagent hiccup view element.
 
   Example:
@@ -88,7 +91,7 @@
            :left 1
            :right 1
            :bottom 1}
-          props)
+          box)
          (for [[idx [value label]] (map-indexed vector options)]
            [:box {:key value
                   :top idx
