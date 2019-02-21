@@ -1,4 +1,4 @@
-(ns leiningen.new.cljs-cli
+(ns leiningen.new.cljs-tui
   (:require [clojure.java.io :as io]
             [leiningen.new.templates :refer [->files
                                              date
@@ -10,7 +10,7 @@
                                              year]]
             [leiningen.core.main :as main]))
 
-(def render (renderer "cljs-cli"))
+(def render (renderer "cljs-tui"))
 
 (defn mark-last
   [deps]
@@ -110,7 +110,7 @@
 
 (defn create-files
   [name args]
-  (let [render (renderer "cljs-cli")
+  (let [render (renderer "cljs-tui")
         main-ns (sanitize-ns name)
         type (first args)
         data {:raw-name name
@@ -125,7 +125,7 @@
               :shadow?        (= type "+shadow")
               :clj-deps clj-deps
               :cljs-deps cljs-deps}]
-    (main/info "Generating fresh 'lein new' cljs-cli project.")
+    (main/info "Generating fresh 'lein new' cljs-tui project.")
     (->> args
          (mapcat #(get files %))
          (into (get files :common))
@@ -142,7 +142,7 @@
 
 (defn help
   []
-  (println "USAGE: lein new cljs-cli [args...]")
+  (println "USAGE: lein new cljs-tui [args...]")
   (println "")
   (println   "  Args can be one of the following:
 
@@ -165,13 +165,13 @@
 
 (defn display-error
   [args]
-  (println "Invalid arguments to new cljs-cli template.")
+  (println "Invalid arguments to new cljs-tui template.")
   (println "Received:" (clojure.string/join " " args))
   (println "")
   (help)
   (System/exit 1))
 
-(defn cljs-cli
+(defn cljs-tui
   "FIXME: write documentation"
   ([name]
    (create-files name ["+shadow"]))

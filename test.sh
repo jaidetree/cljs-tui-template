@@ -10,7 +10,7 @@ if [ -z "$1" ];
 fi;
 
 rm -rf examples/$name/*
-lein new cljs-cli my-test-project --force --to-dir examples/$name -- "$@"
+lein new cljs-tui my-test-project --force --to-dir examples/$name -- "$@"
 
 cat "examples/$name/package.json"
 if [ "$name" == "shadow" ];then

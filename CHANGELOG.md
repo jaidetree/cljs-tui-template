@@ -20,5 +20,5 @@ All notable changes to this project will be documented in this file. This change
 - Files from the new template.
 - Widget maker public API - `make-widget-sync`.
 
-[Unreleased]: https://github.com/your-name/cljs-cli/compare/0.1.1...HEAD
-[0.1.1]: https://github.com/your-name/cljs-cli/compare/0.1.0...0.1.1
+[Unreleased]: https://github.com/eccentric-j/cljs-tui-template/compare/0.1.1...HEAD
+[0.1.1]: https://github.com/eccentric-j/cljs-tui-template/compare/0.1.0...0.1.1

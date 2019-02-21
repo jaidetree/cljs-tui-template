@@ -74,11 +74,11 @@
      :left 1
      :right 1
      :bottom 1}
-    [:text {:content "This is a sample app using the leiningen cljs-cli template:"}]
+    [:text {:content "Demo ClojureScript Terminal-User-Interface (TUI) app generated from the leiningen cljs-tui template."}]
     [:box {:top 3
            :align :center
            :style {:fg :green}
-           :content "https://github.com/eccentric-j/cljs-cli-template"}]
+           :content "https://github.com/eccentric-j/cljs-tui-template"}]
     [:text {:top 5
             :align :center
             :content  (join "\n  - "
@@ -150,7 +150,7 @@
      {:top 12
       :left 4
       :align :left
-      :content "https://github.com/eccentric-j/cljs-cli-template\nhttps://eccentric-j.com/"}]]])
+      :content "https://github.com/eccentric-j/cljs-tui-template\nhttps://eccentric-j.com/"}]]])
 
 (defn loader
   "Shows a mock-loader progress bar for dramatic effect.

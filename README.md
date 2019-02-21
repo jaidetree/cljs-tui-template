@@ -1,4 +1,4 @@
-# cljs-cli
+# cljs-tui
 
 A Leiningen template for FIXME.
 
