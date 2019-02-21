@@ -64,7 +64,7 @@
 (defn ui
   "Basic wrapper to show the demo app and the debug view half height."
   [_]
-  (let [view (:router/view @(rf/subscribe [:db]))]
+  (let [view @(rf/subscribe [:view])]
     [demo
      {:view view}
      [debug-box]]))

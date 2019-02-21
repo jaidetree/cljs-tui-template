@@ -1,4 +1,6 @@
 (ns {{main-ns}}.main
+  "Main application entrypoint. Defines root UI view, cli-options,
+  arg parsing logic, and initialization routine"
   (:require
    [clojure.tools.cli :refer [parse-opts]]
    [mount.core :refer [defstate] :as mount]
@@ -11,8 +13,11 @@
    [{{main-ns}}.views :as views]))
 
 (defn ui
+  "Root ui view.
+  Takes no arguments.
+  Returns hiccup demo element to run the demo app."
   [_]
-  (let [view (:router/view @(rf/subscribe [:db]))]
+  (let [view @(rf/subscribe [:view])]
     [demo {:view view}]))
 
 (def cli-options
@@ -27,10 +32,16 @@
    ["-h" "--help"]])
 
 (defn args->opts
+  "Takes a list of arguments.
+  Returns a map of parsed CLI args."
   [args]
   (parse-opts args cli-options))
 
 (defn init!
+  "Initialize the application.
+  Takes a root UI view function that returns a hiccup element and optionally
+  a map of parsed CLI args.
+  Returns rendered reagent view."
   [view & {:keys [opts]}]
   (mount/start)
   (rf/dispatch-sync [:init (:options opts)])
@@ -39,6 +50,10 @@
       (render @screen)))
 
 (defn main!
+  "Main application entrypoint function. Initializes app, renders root UI view
+  and initializes the re-frame app db.
+  Takes list of CLI args.
+  Returns rendered reagent view."
   [& args]
   (init! ui :opts (args->opts args)))
 

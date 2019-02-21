@@ -1,5 +1,5 @@
 # {{name}}
-A ClojureScript CLI to ...
+A ClojureScript TUI to ...
 
 ## Installation
 
