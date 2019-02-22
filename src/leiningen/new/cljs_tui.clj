@@ -44,8 +44,7 @@
                            [react-blessed             "0.5.0"]
                            [react                     "16.7.0"]
                            [react-dom                 "16.7.0"]
-                           [create-react-class        "15.6.3"]
-                           [node-json-color-stringify "1.1.0"]])
+                           [create-react-class        "15.6.3"]])
                 :shadow (format-deps
                          '[[shadow-cljs               "2.7.24"]
                            [source-map-support        "0.5.10"]])
