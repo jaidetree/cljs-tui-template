@@ -1,4 +1,8 @@
 (ns {{main-ns}}.debug.views
+  "General debug views. These wont be included in your production build by default.
+
+  Portions based on:
+  https://github.com/denisidoro/floki/blob/167b6da56fdee86043d34514b352c732fdfc3487/src/floki/debug/view.cljs"
   (:require
    [clojure.pprint :refer [pprint]]
    [clojure.string :refer [join]]
