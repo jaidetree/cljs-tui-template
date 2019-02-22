@@ -4,13 +4,14 @@
    [figwheel-sidecar.config   :as fc]
    [clojure.tools.namespace.repl :refer (refresh refresh-all)]))
 
-(defn start []
-  "Start figwheel build server"
-  (f/start-figwheel!))
-
 (defn repl []
   "Start cljs repl"
   (f/cljs-repl))
+
+(defn start []
+  "Start figwheel build server"
+  (f/start-figwheel!)
+  (repl))
 
 (defn stop []
   "Stop figwheel build server"
