@@ -85,7 +85,8 @@
                               ["test.cljs.edn"                         "figwheel-main/test.cljs.edn"]
                               ["test/{{nested-dirs}}/test_runner.cljs" "figwheel-main/test/test_runner.cljs"]]
 
-            "+shadow"        [["shadow-cljs.edn" "shadow/shadow-cljs.edn"]]})
+            "+shadow"        [["env/dev/user.clj" "shadow/env/dev/user.clj"]
+                              ["shadow-cljs.edn"  "shadow/shadow-cljs.edn"]]})
 
 (def opts (set (keys files)))
 
