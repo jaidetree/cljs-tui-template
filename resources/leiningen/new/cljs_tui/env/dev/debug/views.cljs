@@ -8,20 +8,17 @@
    [clojure.string :refer [join]]
    [re-frame.core :as rf]
    [reagent.core :as r]
-   [{{main-ns}}.core :refer [screen]]
-   [{{main-ns}}.keys :refer [with-keys]]
-   [{{main-ns}}.views :refer [router vertical-menu]]
-   [{{main-ns}}.demo.views :refer [demo]]))
+   [{{main-ns}}.views :refer [router vertical-menu]]))
 
 (defonce logger
   (r/atom []))
 
 (defn log-height
-  "Takes a blessed screen instance.
-  Calculates half the height of the screen minus 3 for padding and margin.
+  "Calculates half the height of the screen minus 3 for padding and margin.
+  Takes the number of rows that make up the terminal's character height.
   Returns an integer."
-  [screen]
-  (- (/ (.-rows screen) 2)
+  [rows]
+  (- (/ rows 2)
      3))
 
 (defn log-box
@@ -29,7 +26,7 @@
   screen height.
   Can be thrown off by multi-line lines of text.
   Returns hiccup vector."
-  []
+  [rows]
   [:box#log
    {:top          0
     :bottom       0
@@ -46,15 +43,15 @@
            :right   1
            :style   {:fg :yellow
                      :bg :grey}
-           :content (->> (take-last (log-height @screen) @logger)
+           :content (->> (take-last (log-height rows) @logger)
                          (join "\n"))}]])
 
 (defn debug-box
-  "General debug box UI.
-  Displays both the current state and last several lines of output.
-  Defaults to half the height of the screen.
+  "Displays both the current state and last several lines of output.
+  Takes number of rows representing the total screen height.
+  Will display in the bottom half of the screen.
   Returns hiccup vector."
-  []
+  [rows]
   [:text#debug {:bottom 0
                 :left   0
                 :width  " 100%"
@@ -67,16 +64,7 @@
           :left 1
           :bottom 1
           :content (with-out-str (pprint @(rf/subscribe [:db])))}]
-   [log-box]])
-
-(defn ui
-  "Basic wrapper to show the demo app and the debug view half height.
-  Returns hiccup vector."
-  [_]
-  (let [view @(rf/subscribe [:view])]
-    [demo
-     {:view view}
-     [debug-box]]))
+   [log-box rows]])
 
 (defn clear-log!
   "Util function to clear the log if needed. This should likely be called

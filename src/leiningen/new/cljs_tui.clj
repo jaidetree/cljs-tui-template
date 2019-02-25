@@ -14,10 +14,16 @@
 
 (defn mark-last
   [deps]
+  "Marks the last dependency as :last true for complex dependency rendering.
+  Takes a vector of dep maps.
+  Returns a vector of dep maps."
   (assoc-in deps [(dec (count deps)) :last] true))
 
 (defn format-deps
   [deps]
+  "Create a collection of dep maps for more complex rendering.
+  Takes a list of vector pairs [name-sym \"version\"].
+  Returns a single vector list."
   (->> deps
        (map (fn format-dep
               [[name version & {:keys [exclusions]}]]
@@ -69,6 +75,7 @@
                               ["src/{{nested-dirs}}/events.cljs"          "src/events.cljs"]
                               ["src/{{nested-dirs}}/keys.cljs"            "src/keys.cljs"]
                               ["src/{{nested-dirs}}/main.cljs"            "src/main.cljs"]
+                              ["src/{{nested-dirs}}/resize.cljs"          "src/resize.cljs"]
                               ["src/{{nested-dirs}}/subs.cljs"            "src/subs.cljs"]
                               ["src/{{nested-dirs}}/views.cljs"           "src/views.cljs"]
                               ["test/{{nested-dirs}}/core_test.cljs"      "test/core_test.cljs"]]
@@ -91,6 +98,9 @@
 (def opts (set (keys files)))
 
 (defn select-files
+  "Create list of files to render from this template based on build tool.
+  Takes a list of string arguments
+  Returns a list of vectors [\"dest\" \"source\"]"
   [args]
   (->> args
        (select-keys files)
@@ -98,17 +108,26 @@
        (reduce into (get files :common))))
 
 (defn render-template
+  "Use the leiningen render function to resolve the template variables.
+  Takes map of data and a vector of destination and template source file.
+  Returns nil."
   [data [dest template]]
   [dest (render template data)])
 
 (intern 'leiningen.new.templates '*dir*)
 (defn make-executable
+  "Make a file in the template target dir executable.
+  Takes a file to change.
+  Returns nil."
   [file]
   (-> (str leiningen.new.templates/*dir* "/" file)
       (io/file)
       (.setExecutable true)))
 
 (defn create-files
+  "Generate all the template source, config, and script files.
+  Takes the name of the project and a list of args.
+  Returns nil."
   [name args]
   (let [render (renderer "cljs-tui")
         main-ns (sanitize-ns name)
@@ -136,6 +155,7 @@
     (make-executable (str "bin/" (:name data)))))
 
 (defn args-valid?
+  "Predicate to return true when each arg is a valid option we support"
   [args]
   (and (every? opts args)
        (= (count (filter opts args)) 1)))
@@ -172,7 +192,8 @@
   (System/exit 1))
 
 (defn cljs-tui
-  "FIXME: write documentation"
+  "Generate a ClojureScript terminal-user-interface application template.
+  Takes an optional build tool like +shadow, +figwheel-main, or +lein-figwheel."
   ([name]
    (create-files name ["+shadow"]))
   ([name & args]

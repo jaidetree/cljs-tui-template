@@ -1,9 +1,21 @@
 (ns {{#figwheel-main?}}^:figwheel-hooks {{/figwheel-main?}}{{main-ns}}.app
   (:require
+   [re-frame.core :as rf]
    [reagent.core :as r]
    [{{main-ns}}.core :refer [render screen]]
    [{{main-ns}}.debug.views :as debug]
+   [{{main-ns}}.demo.views :refer [demo]]
    [{{main-ns}}.main :as main]))
+
+(defn ui
+  "Basic wrapper to show the demo app and the debug view half height.
+  Returns hiccup vector."
+  [_]
+  (let [view @(rf/subscribe [:view])
+        rows (:rows @(rf/subscribe [:size]))]
+    [demo
+     {:view view}
+     [debug/debug-box rows]]))
 
 (defn main!
   "Main development entrypoint.
@@ -11,7 +23,7 @@
   then initializes the ui.
   Returns nil but mostly invokes side-effects."
   [& args]
-  (main/init! debug/ui :opts (main/args->opts args)))
+  (main/init! ui :opts (main/args->opts args)))
 
 (defn log-fn
   "A log handler function to append messages to our debug/logger atom.
@@ -23,7 +35,7 @@
 (defn {{#figwheel-main?}}^:after-load {{/figwheel-main?}}reload!
   "Called when dev env is reloaded. Re-renders the ui and logs a message."
   [_]
-  (-> (r/reactify-component debug/ui)
+  (-> (r/reactify-component ui)
       (r/create-element #js {})
       (render @screen))
   (println "Reloading app"))

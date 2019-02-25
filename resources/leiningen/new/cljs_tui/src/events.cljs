@@ -10,9 +10,10 @@
 
 (rf/reg-event-db
   :init
-  (fn [db [_ opts]]
-    {:router/view :loader
-     :opts opts}))
+  (fn [db [_ opts terminal-size]]
+    {:opts opts
+     :router/view :loader
+     :terminal/size terminal-size}))
 
 (rf/reg-event-db
   :update

@@ -9,6 +9,7 @@
    [{{main-ns}}.core :refer [render screen]]
    [{{main-ns}}.demo.views :refer [demo]]
    [{{main-ns}}.events]
+   [{{main-ns}}.resize :refer [size]]
    [{{main-ns}}.subs]
    [{{main-ns}}.views :as views]))
 
@@ -44,7 +45,7 @@
   Returns rendered reagent view."
   [view & {:keys [opts]}]
   (mount/start)
-  (rf/dispatch-sync [:init (:options opts)])
+  (rf/dispatch-sync [:init (:options opts) (size @screen)])
   (-> (r/reactify-component view)
       (r/create-element #js {})
       (render @screen)))

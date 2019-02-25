@@ -12,3 +12,8 @@
   :view
   (fn [db _]
     (:router/view db)))
+
+(rf/reg-sub
+  :size
+  (fn [db _]
+    (:terminal/size db)))

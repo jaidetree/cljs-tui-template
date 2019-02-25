@@ -191,8 +191,15 @@
 
 (defn demo
   "Main demo UI wrapper.
-  Takes a view keyword to route to a view function and a child hiccup vector
-  to display as well.
+
+  Takes a hash-map and a hiccup child vector:
+
+  hash-map:
+  :view keyword - Current view keyword that maps to one of the views below.
+
+  child:
+  Typically something like a hiccup [:box ...] vector
+
   Returns hiccup :box vector."
   [{:keys [view]} child]
   [:box#base {:left   0
