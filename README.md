@@ -8,6 +8,21 @@ Create rich Terminal-User-Interface (TUI) apps in ClojureScript using web techno
   <a href="./doc/cljs-tui-demo.gif"><img src="./doc/cljs-tui-demo.gif" alt="Demo of CLJS TUI" /></a>
 </p>
 
+## Table of Contents
+
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+3. [What's included?](#whats-included)
+4. [Usage](#usage)
+5. [Getting Started](#getting-started)
+6. [Dependencies and Further Information](#dependencies-and-further-documentation)
+7. [Frequently Asked Questions](#faqs)
+8. [Credits](#credits)
+9. [Thanks](#thanks)
+10. [Support](#support)
+11. [Contributing](#contributing)
+12. [License](#license)
+
 
 ## Quick Start
 
