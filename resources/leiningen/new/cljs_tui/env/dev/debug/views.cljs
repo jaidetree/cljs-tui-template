@@ -17,15 +17,18 @@
   (r/atom []))
 
 (defn log-height
-  "Takes a blessed screen and returns the height of the log.
+  "Takes a blessed screen instance.
+  Calculates half the height of the screen minus 3 for padding and margin.
   Returns an integer."
   [screen]
   (- (/ (.-rows screen) 2)
      3))
 
 (defn log-box
-  "Display a box that shows the last several lines of logged output.
-  Can be thrown off by multi-line lines of text."
+  "Display a box that shows the last several lines of logged output based on
+  screen height.
+  Can be thrown off by multi-line lines of text.
+  Returns hiccup vector."
   []
   [:box#log
    {:top          0
@@ -49,7 +52,8 @@
 (defn debug-box
   "General debug box UI.
   Displays both the current state and last several lines of output.
-  Defaults to half the height of the screen."
+  Defaults to half the height of the screen.
+  Returns hiccup vector."
   []
   [:text#debug {:bottom 0
                 :left   0
@@ -66,7 +70,8 @@
    [log-box]])
 
 (defn ui
-  "Basic wrapper to show the demo app and the debug view half height."
+  "Basic wrapper to show the demo app and the debug view half height.
+  Returns hiccup vector."
   [_]
   (let [view @(rf/subscribe [:view])]
     [demo
@@ -74,6 +79,7 @@
      [debug-box]]))
 
 (defn clear-log!
-  "Util function to clear the log if needed."
+  "Util function to clear the log if needed. This should likely be called
+  from the REPL during development."
   []
   (reset! logger {}))

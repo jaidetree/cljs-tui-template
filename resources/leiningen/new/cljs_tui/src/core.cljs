@@ -5,14 +5,19 @@
    [mount.core :refer [defstate] :as mount]
    [{{main-ns}}.keys :as keys]))
 
+;; Import required npm & node dependencies
 (def blessed (js/require "blessed"))
 (def fs (js/require "fs"))
 (def react-blessed (js/require "react-blessed"))
 (def tty (js/require "tty"))
 
+;; Setup mount to work in ClojureScript
 (mount/in-cljc-mode)
 
-(defstate tty-fd :start (.openSync fs "/dev/tty" "r+"))
+(defstate tty-fd
+  "Used to open a text-terminal interface for reading and writing."
+  :start (.openSync fs "/dev/tty" "r+"))
+
 (defstate program
   "Blessed program state describes general app behavior.
   https://github.com/chjj/blessed/blob/v0.1.81/lib/program.js"

@@ -17,7 +17,7 @@
 
 (defn unbind-keys
   "Remove key bindings from blessed screen instance.
-  Takes a blssed screen and a map of keybindings.
+  Takes a blessed screen instance and a map of keybindings.
   Returns nil."
   [screen key-bindings]
   (doseq [[hotkeys f] key-bindings]

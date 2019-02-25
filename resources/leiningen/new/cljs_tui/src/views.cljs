@@ -10,7 +10,7 @@
   :views map     - Map of values (usually keywords) to hiccup view functions
   :view  keyword - Current view to display. Should be the key of :views map
 
-  Returns the hiccup element the current view-fn returns.
+  Returns the hiccup vector returned by the selected view-fn.
 
   Example:
   (router {:views {:home home-fn

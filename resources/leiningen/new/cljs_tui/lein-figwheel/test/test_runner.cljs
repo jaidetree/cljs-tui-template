@@ -12,7 +12,7 @@
 
 ;; Add the tests you wish to run here
 (defn main!
-  "Main entrypoint. Runs the provided test namespaces."
+  "Main test entrypoint. Runs the required test namespaces."
   []
   (cljs.test/run-tests '{{namespace}}-test))
 

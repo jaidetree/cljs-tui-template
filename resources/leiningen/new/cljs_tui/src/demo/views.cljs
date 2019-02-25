@@ -7,10 +7,10 @@
    [{{main-ns}}.views :refer [router vertical-menu]]))
 
 (defn navbar
-  "Display a box with a border and an interactive vertical-menu.
+  "Displays a blessed js box with a vertical-menu used for navigation.
   User can use j/k or up/down to navigate items and either enter or l to view
   a page. Dispatches re-frame :update to set :router/view in app db.
-  Returns a hiccup :box element."
+  Returns a hiccup :box vector."
   [_]
   [:box#home
    {:top    0
@@ -29,8 +29,7 @@
                    :on-select #(rf/dispatch [:update {:router/view %}])}]])
 
 (defn home
-  "Intro page with welcome message and usage bindings.
-  Takes no arguments.
+  "Display welcome message and general usage info to user.
   Returns hiccup :box element."
   [_]
   [:box#home
@@ -57,9 +56,8 @@
       :content "Usage:\n\n  - j/k or up/down to select a page\n  - enter or l to view page"}]]])
 
 (defn about
-  "About page to explain project and features.
-  Takes no arguments.
-  Returns hiccup :box element."
+  "Display link to the template project and share features.
+  Returns hiccup :box vector."
   [_]
   [:box#about
    {:top 0
@@ -91,9 +89,8 @@
                          "Supports shadow, figwheel-main, or lein-figwheel"])}]]])
 
 (defn resources
-  "Resources page shares links to learn more about this project.
-  Takes no arguments.
-  Returns hiccup :box element."
+  "Share links to libraries this project is built with.
+  Returns hiccup :box vector."
   [_]
   [:box#about
    {:top 0
@@ -119,9 +116,8 @@
                   "https://github.com/bhauman/lein-figwheel"])]]])
 
 (defn credits
-  "Credits page to give proper credit to the inspiration for this project.
-  Takes no arguments.
-  Returns hiccup :box element."
+  "Give respect and credit to the Denis for inspiring for this project.
+  Returns hiccup :box vector."
   [_]
   [:box#about
    {:top 0
@@ -154,12 +150,11 @@
 
 (defn loader
   "Shows a mock-loader progress bar for dramatic effect.
-  Uses with-let to create a progress atom and an interval to update it every
-  15 ms until progress is 100.
-  Starts the timer on each mount.
-  Navigates to home page when completed.
-  Takes no arguments.
-  Returns hiccup :box element."
+  - Uses with-let to create a progress atom
+  - Uses a js interval to update it every 15 ms until progress is 100.
+  - Starts the timer on each mount.
+  - Navigates to home page when completed.
+  Returns hiccup :box vector."
   [_]
   (r/with-let [progress (r/atom 0)
                interval (js/setInterval #(swap! progress inc) 15)]
@@ -195,10 +190,10 @@
        :label " progress "}]]))
 
 (defn demo
-  "Takes props hash-map and a child element to display.
-  Props should contain a :view keyword mapped to the current view to display
-  such as :loader or :home.
-  Returns hiccup :box element."
+  "Main demo UI wrapper.
+  Takes a view keyword to route to a view function and a child hiccup vector
+  to display as well.
+  Returns hiccup :box vector."
   [{:keys [view]} child]
   [:box#base {:left   0
               :right  0

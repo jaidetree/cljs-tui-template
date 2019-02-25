@@ -1,5 +1,5 @@
 (defproject cljs-tui/lein-template "0.1.0-SNAPSHOT"
-  :description "A lein template for creating very rich ClojureScript Terminal-User-Interface (TUI) applications powered by reagent + blessed views"
+  :description "A lein template for creating rich ClojureScript Terminal-User-Interface (TUI) apps powered by reagent, react, and blessed views."
   :url "https://github.com/eccentric-j/cljs-tui-template"
   :license {:name "The Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}

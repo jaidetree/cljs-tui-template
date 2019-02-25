@@ -6,16 +6,16 @@
    [{{main-ns}}.main :as main]))
 
 (defn main!
-  "Main entrypoint when in development.
+  "Main development entrypoint.
   Takes list of cli args, parses into opts map, inserts opts into re-frame db
-  then initializes the ui."
+  then initializes the ui.
+  Returns nil but mostly invokes side-effects."
   [& args]
   (main/init! debug/ui :opts (main/args->opts args)))
 
 (defn log-fn
-  "A general logging function used to display all console.log messages into
-  the debug log-box.
-  Takes variadic arguments.
+  "A log handler function to append messages to our debug/logger atom.
+  Takes variadic arguments, typically strings or stringifiable args.
   Appends string of all args to log."
   [& args]
   (swap! debug/logger conj (clojure.string/join " " args)))
@@ -28,7 +28,8 @@
       (render @screen))
   (println "Reloading app"))
 
-;; Override the log messages to display in our log-box
+;; Override the console.* messages to use our log-fn. Later if we call
+;; console.log or println the message shows up in our debug box.
 (set! (.-log js/console) log-fn)
 (set! (.-error js/console) log-fn)
 (set! (.-info js/console) log-fn)
