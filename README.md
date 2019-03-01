@@ -364,7 +364,7 @@ In early 2019 I saw this link on Reddit in [r/clojure](https://www.reddit.com/r/
 
 https://github.com/denisidoro/floki
 
-Denis Isodoro created this beautiful terminal-user-interface JSON explorer app using ClojureScript, Reagent, React, and Blessed. It completely blew my mind! This template would not exist without him or his work on Floki.
+Denis Isidoro created this beautiful terminal-user-interface JSON explorer app using ClojureScript, Reagent, React, and Blessed. It completely blew my mind! This template would not exist without him or his work on Floki.
 
 ---
 
@@ -378,7 +378,7 @@ Also shout out to [VenueBook](https://venuebook.com) for supporting my developme
 
 ## Support
 
-Please create issues on related dependencies unless it is specific to this template. The library communities are more active and have more support resources. If you do run into problems with this template please create an issue on this repo. For the quickest response, share your issue or questions in the [cljs-tui-template topic](zulip-url) on the Clojurians Zulip chat.
+Please create issues on related dependencies unless it is specific to this template. The library communities are more active and have more support resources. If you do run into problems with this template please create an issue on this repo. For the quickest response, share your issue or questions in the [cljs-tui-template topic][zulip-url] on the Clojurians Zulip chat.
 
 ---
 
