@@ -366,7 +366,7 @@ https://github.com/denisidoro/floki
 
 Denis Isidoro created this beautiful terminal-user-interface JSON explorer app using ClojureScript, Reagent, React, and Blessed. It completely blew my mind! This template would not exist without him or his work on Floki.
 
-Camilo Polymeris came up with the first concept and implementation of this stack in the gist https://gist.github.com/polymeris/5e117676b79a505fe777df17f181ca2e that became the basis for Floki that even made its way into this template.
+Camilo Polymeris came up with the concept and first implementation of this stack in the gist https://gist.github.com/polymeris/5e117676b79a505fe777df17f181ca2e. It then became the basis for Floki, and elements of it even made their way into this template.
 
 ---
 
