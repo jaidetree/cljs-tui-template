@@ -2,7 +2,8 @@
   "General debug views. These wont be included in your production build by default.
 
   Portions based on:
-  https://github.com/denisidoro/floki/blob/167b6da56fdee86043d34514b352c732fdfc3487/src/floki/debug/view.cljs"
+  https://github.com/denisidoro/floki/blob/167b6da56fdee86043d34514b352c732fdfc3487/src/floki/debug/view.cljs
+  and https://gist.github.com/polymeris/5e117676b79a505fe777df17f181ca2e"
   (:require
    [clojure.pprint :refer [pprint]]
    [clojure.string :refer [join]]
@@ -25,7 +26,10 @@
   "Display a box that shows the last several lines of logged output based on
   screen height.
   Can be thrown off by multi-line lines of text.
-  Returns hiccup vector."
+  Returns hiccup vector.
+
+  Source inspired by:
+  https://gist.github.com/polymeris/5e117676b79a505fe777df17f181ca2e"
   [rows]
   [:box#log
    {:top          0
@@ -50,7 +54,10 @@
   "Displays both the current state and last several lines of output.
   Takes number of rows representing the total screen height.
   Will display in the bottom half of the screen.
-  Returns hiccup vector."
+  Returns hiccup vector.
+
+  Source for this came from:
+  https://gist.github.com/polymeris/5e117676b79a505fe777df17f181ca2e"
   [rows]
   [:text#debug {:bottom 0
                 :left   0
