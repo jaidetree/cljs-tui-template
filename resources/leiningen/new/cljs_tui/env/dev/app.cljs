@@ -21,7 +21,12 @@
   "Main development entrypoint.
   Takes list of cli args, parses into opts map, inserts opts into re-frame db
   then initializes the ui.
-  Returns nil but mostly invokes side-effects."
+
+  Returns nil but mostly invokes side-effects.
+
+
+  Source for this came from:
+  https://gist.github.com/polymeris/5e117676b79a505fe777df17f181ca2e#file-core-cljs-L105"
   [& args]
   (main/init! ui :opts (main/args->opts args)))
 
@@ -42,6 +47,7 @@
 
 ;; Override the console.* messages to use our log-fn. Later if we call
 ;; console.log or println the message shows up in our debug box.
+
 (set! (.-log js/console) log-fn)
 (set! (.-error js/console) log-fn)
 (set! (.-info js/console) log-fn)

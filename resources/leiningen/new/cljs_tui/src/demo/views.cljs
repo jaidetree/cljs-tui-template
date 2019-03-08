@@ -132,21 +132,30 @@
      :left 1
      :right 1
      :bottom 1}
-    [:text (join "\n  - "
-                 ["This whole project would not exist without Denis Isidoro and his Floki project. A lightbulb lit up and I knew I had to make a template based on the stack he used to create Floki."])]
+    [:box
+     {:top 0
+      :align :center
+      :content "https://github.com/denisidoro/floki"}]
+    [:box
+     {:top 2
+      :content (join "\n  - "
+                 ["This project was deeply inspired by Floki, a ClojureScript TUI created by Denis Isidoro."])}]
     [:box
      {:top 5
       :align :center
-      :content "https://github.com/denisidoro/floki"}]
+      :content "https://git.io/fhhOf"}]
+    [:box
+     {:top 7
+      :content "Special thanks to Camilo Polymeris whose gist inspired Floki and this template."}]
     [:text
-     {:top 8}
+     {:top 10}
      (join "\n  - "
-           ["This template was created by Eccentric J and is open sourced on github. You can use the Clojure leiningen tool to generate a template."])]
+           ["Templated created by Eccentric J and is open sourced on github."])]
     [:box
      {:top 12
-      :left 4
+      :left 0
       :align :left
-      :content "https://github.com/eccentric-j/cljs-tui-template\nhttps://eccentric-j.com/"}]]])
+      :content "- https://github.com/eccentric-j/cljs-tui-template\n- https://eccentric-j.com/"}]]])
 
 (defn loader
   "Shows a mock-loader progress bar for dramatic effect.
